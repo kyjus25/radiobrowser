@@ -1,0 +1,32 @@
+header {
+  width: 100%;
+  color: rgba(214, 220, 228, 255);
+  font-weight: 100;
+  padding: 10px;
+  transition: all;
+  transition-duration: .4s;
+  background-color: transparent;
+  z-index: 5;
+}
+header.false, header.not-docked {
+  background-color: black;
+}
+header.true {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+header .logo {
+  display: inline-block;
+  cursor: pointer;
+}
+#navigation span {
+  margin-left: 20px;
+  cursor: pointer;
+}
+#navigation span:hover {
+  opacity: 0.8;
+}
+#navigation .button a {
+  color: rgba(214, 220, 228, 255);
+}

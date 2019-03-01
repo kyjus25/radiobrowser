@@ -1,0 +1,17 @@
+<header class="{{isOnHome}} {{docked}}">
+  <div class="ui-g">
+    <div class="ui-g-6">
+      <div class="logo" [routerLink]="['/']">
+        Community Radio Browser
+      </div>
+    </div>
+    <div class="ui-g-6 text-right">
+      <div id="navigation">
+        <span [routerLink]="['/faqs']">FAQ</span>
+        <span [routerLink]="['/stations']">Stations</span>
+        <span [routerLink]="['/stations/new']">New Station</span>
+        <span class="button"><a target="_blank" href="http://www.radio-browser.info/webservice">Developer API</a></span>
+      </div>
+    </div>
+  </div>
+</header>

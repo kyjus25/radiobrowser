@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900');
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+.text-right {
+  text-align: right;
+}
+.button {
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 5px;
+  padding: 10px;
+}
+.heading {
+  text-align: center;
+  margin: 50px 0;
+}
+.heading p:first-of-type {
+  color: grey;
+  font-size: 20px;
+  margin: 0;
+  font-weight: 300;
+}
+.heading h1 {
+  margin: 0;
+}
+.invert {
+  background-color: black;
+  padding: 20px;
+  margin-top: 50px;
+}
+.invert .heading h1 {
+  color: white;
+}
+.invert {
+  color: white;
+  font-weight: 100;
+  padding-bottom: 50px;
+}
+.page-wrapper {
+  max-width: 1000px;
+  margin: auto;
+}
+
+#search input {
+  width: 300px;
+  padding: 14px;
+  height: 50px;
+  border-radius: 0;
+  border: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+#float-input8 input {
+  width: calc(582px - 45px);
+}
+
+#accordian-search .container .full-width, #accordian-search .container .ui-autocomplete {
+  width: calc(100% - 80px) !important;
+}
+#accordian-search .container .ui-autocomplete input {
+  width: 100% !important;
+}
+
+.ui-table-loading-content {
+  background-color: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100%;
+  top: 0 !important;
+  left: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white !important;
+  font-size: 30px;
+}
+
+@media screen and (max-width: 1040px) {
+  #feature {
+    background-size: cover !important;
+    background-position: center center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #search {
+    position: static !important;
+    margin: 0 20px;
+  }
+  #search h1 {
+    margin: auto !important;
+  }
+}

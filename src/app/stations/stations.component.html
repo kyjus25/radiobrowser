@@ -1,0 +1,153 @@
+<div class="page-wrapper">
+  <h1>Stations</h1>
+
+  <p>To view stations, please enter a search term into at least one of the fields below.</p>
+
+  <p-accordion id="accordian-search">
+    <p-accordionTab
+      header="Search Terms"
+      [selected]="searchIsSelected"
+      (keyup.enter)="searchStations()"
+    >
+
+      <div class="container">
+        <p class="label">Name</p>
+        <input class="full-width" [(ngModel)]="name" type="text" pInputText>
+      </div>
+
+      <br>
+
+      <div class="container">
+        <p class="label">Country</p>
+        <p-autoComplete
+          [(ngModel)]="country"
+          field="name"
+          [forceSelection]="true"
+          [suggestions]="filteredCountries"
+          (completeMethod)="searchCountries($event)"
+        ></p-autoComplete>
+      </div>
+
+      <br>
+
+      <div class="container">
+        <p class="label">State</p>
+        <p-autoComplete
+          [(ngModel)]="state"
+          field="name"
+          [forceSelection]="true"
+          [suggestions]="filteredStates"
+          (completeMethod)="searchStates($event)"
+        ></p-autoComplete>
+      </div>
+
+      <br>
+
+      <div class="container">
+        <p class="label">Language</p>
+        <p-autoComplete
+          [(ngModel)]="language"
+          field="name"
+          [forceSelection]="true"
+          [suggestions]="filteredLanguages"
+          (completeMethod)="searchLanguages($event)"
+        ></p-autoComplete>
+      </div>
+
+      <br>
+
+      <div class="container">
+        <p class="label">Tags</p>
+        <p-autoComplete
+          [(ngModel)]="tags"
+          field="name"
+          [dropdown]="true"
+          [multiple]="true"
+          [forceSelection]="true"
+          [suggestions]="filteredTags"
+          (completeMethod)="searchTags($event)"
+        ></p-autoComplete>
+      </div>
+
+      <br>
+
+      <button (click)="searchStations()">Search Stations</button>
+    </p-accordionTab>
+  </p-accordion>
+
+
+
+  <p *ngIf="tableData && noResults">
+    No results for this query.
+  </p>
+  <!--<p-multiSelect-->
+    <!--[options]="cols"-->
+    <!--[(ngModel)]="visibleColumns"-->
+    <!--(onChange)="filterColumns();"-->
+    <!--optionLabel="header">-->
+  <!--</p-multiSelect>-->
+  <p-table
+           *ngIf="(tableData && !noResults) || loading"
+           [columns]="cols"
+           [value]="tableData"
+           [paginator]="true"
+           [responsive]="true"
+           [autoLayout]="true"
+           dataKey="id"
+           [rowsPerPageOptions]="[5,10,25,50,100]"
+           [rows]="10"
+           [loading]="loading">
+    <ng-template pTemplate="header">
+      <tr>
+        <ng-container *ngFor="let col of cols">
+          <th *ngIf="col.show" [pSortableColumn]="col.field" width="{{col.width}}">
+            {{col.header}}
+            <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+          </th>
+        </ng-container>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-station>
+      <tr>
+        <ng-container *ngFor="let col of cols">
+          <td *ngIf="col.show && col.field !== 'actions'">
+            <div *ngIf="col.field === 'stream-info'">
+              <div *ngIf="station.lastcheckok === '0'">
+                <span class="chip">BROKEN</span>
+              </div>
+              <div *ngIf="station.lastcheckok === '1'">
+                <span class="chip">{{station.codec}}</span>
+                <span class="chip">{{station.bitrate}} kbps</span>
+              </div>
+            </div>
+            <div *ngIf="col.field === 'tags'">
+              <div *ngIf="station.tags.length !== 0">
+                <span class="chip" *ngFor="let tag of station.tags.split(',')">{{tag}}</span>
+              </div>
+            </div>
+
+            <div *ngIf="col.field === 'logo'">
+              <div class="img-container"><img class="favicon" src="{{station.favicon}}"></div>
+            </div>
+            <div
+              *ngIf="
+              col.field !== 'stream-info' &&
+              col.field !== 'logo' &&
+              col.field !== 'tags'">
+              {{station[col.field]}}
+            </div>
+          </td>
+        </ng-container>
+        <td>
+          <i (click)="playStation(station)" class="fas fa-play-circle"></i>
+          <i class="fas fa-save"></i>
+          <i class="fas fa-home"></i>
+          <i class="fas fa-like"></i>
+          <i class="fas fa-step-backward"></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<br>
+

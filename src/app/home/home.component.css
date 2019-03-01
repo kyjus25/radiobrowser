@@ -1,0 +1,138 @@
+#feature {
+  height: calc(100vh);
+  background-image: url('/assets/firdaus-roslan-596546-unsplash.jpg');
+  background-size: 150%;
+  background-position: -20vw -30vw;
+  background-repeat: no-repeat;
+}
+#search {
+  position: absolute;
+  bottom: 100px;
+  left: 20px;
+  z-index: 2;
+}
+#search h1 {
+  color: black;
+  max-width: 400px;
+  background-color: white;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 50px;
+  margin: 0;
+}
+.form {
+  background-color: rgba(255,255,255,0.3);
+  display: inline-block;
+  padding: 20px;
+}
+.searchItem {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+.searchItem img {
+  max-width: 50px;
+  max-height: 50px;
+  margin-right: 10px;
+}
+.searchItem div {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.form button {
+  height: 50px;
+  border: none;
+  border-radius: 0;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: black;
+  color: white;
+  padding: 0 20px;
+  font-size: 20px;
+  font-weight: 100;
+}
+#stats {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+#stats i {
+  margin: auto;
+  display: flex;
+  font-size: 40px;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: black;
+  border-radius: 100%;
+  color: white;
+  margin-bottom: 10px;
+}
+#stats p:first-of-type {
+  color: grey;
+  font-size: 30px;
+  margin: 0;
+}
+#stats p:last-of-type {
+  margin: 0;
+  margin-top: 10px;
+}
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+#apps {
+  max-width: 1000px;
+  margin: auto;
+}
+#apps a {
+  background-color: black;
+  color: white;
+  border-radius: 100%;
+  padding: 5px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 10px 5px;
+}
+.app .wrapper {
+  text-align: center;
+  margin: 10px;
+}
+.app .border {
+  border: 1px solid black;
+  border-top: none;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.app p {
+  margin: 0;
+}
+.app .name {
+  padding: 10px 0;
+}
+.app .desc {
+  font-size: 12px;
+  font-weight: 100;
+}
+.icon {
+  background-color: rgba(214, 220, 228, 255);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border: 1px solid black;
+  border-bottom: none;
+  padding: 30px 0;
+  text-align: center;
+}
+.app a:hover {
+  opacity: 0.8;
+}
+.icon img {
+  height: 60px;
+  margin: auto;
+  display: block;
+  max-width: 100%;
+}

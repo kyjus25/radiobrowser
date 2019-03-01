@@ -1,0 +1,105 @@
+<div id="feature">
+  <div id="search">
+    <h1>Find a Station</h1>
+    <div class="form">
+      <!--<p-autoComplete-->
+        <!--[(ngModel)]="searchText"-->
+        <!--[suggestions]="searchResults"-->
+        <!--field="name"-->
+        <!--(completeMethod)="getSearchResults($event)"-->
+      <!--&gt;-->
+        <!--<ng-template let-searchItem pTemplate="item">-->
+          <!--<div class="ui-helper-clearfix searchItem">-->
+            <!--<img src="{{searchItem.favicon}}">-->
+            <!--<div>{{searchItem.name}}</div>-->
+          <!--</div>-->
+        <!--</ng-template>-->
+      <!--</p-autoComplete>-->
+
+      <input
+        placeholder="Station name"
+        type="text"
+        pInputText
+        [(ngModel)]="searchText"
+        (keyup.enter)="goToStations()">
+
+      <!--<p-dropdown [options]="filterOptions" [(ngModel)]="filterBy"></p-dropdown>-->
+      <button (click)="goToStations()">Search</button>
+    </div>
+  </div>
+</div>
+
+<div class="heading">
+  <p>What We Offer</p>
+  <h1>CURRENT STATISTICS</h1>
+</div>
+
+<div id="stats" class="ui-g">
+  <div class="ui-g-3">
+    <i class="fas fa-broadcast-tower"></i>
+    <p *ngIf="stats !== undefined">{{numberWithCommas(stats.stations)}}</p>
+    <p>Stations</p>
+  </div>
+  <div class="ui-g-3">
+    <i class="fas fa-tags"></i>
+    <p *ngIf="stats !== undefined">{{numberWithCommas(stats.tags)}}</p>
+    <p>Tags</p>
+  </div>
+  <div class="ui-g-3">
+    <i class="fas fa-globe"></i>
+    <p *ngIf="stats !== undefined">{{numberWithCommas(stats.countries)}}</p>
+    <p>Countries</p>
+  </div>
+  <div class="ui-g-3">
+    <i class="fas fa-volume-up"></i>
+    <p *ngIf="stats !== undefined">{{numberWithCommas(stats.languages)}}</p>
+    <p>Languages</p>
+  </div>
+</div>
+
+<div class="invert">
+  <div class="heading">
+    <p>About the API</p>
+    <h1>Free For Everyone!</h1>
+  </div>
+  <div class="container">
+    <p>• Everyone can use this station board in their software freely. Just have a look at the API documentation.<p>
+    <p>• Everyone is free to use the collected data (station names, tags, links to stream, links to homepages, language, country, state) in their works.</p>
+    <p>• I give all the rights I have at the accumulated data to the public domain.</p>
+    <p>• A daily backup of the MariaDB tables is at www.radio-browser.info/backups/ and latest.</p>
+  </div>
+</div>
+
+<div class="heading">
+  <p>Get Involved</p>
+  <h1>Available Projects</h1>
+</div>
+
+<div id="apps" class="ui-g">
+  <div class="ui-g-3 app" *ngFor="let app of applications">
+    <div class="wrapper">
+      <div class="icon">
+        <img src="{{app.icon}}">
+      </div>
+      <div class="border">
+        <p class="name">{{app.name}}</p>
+        <p class="desc">{{app.description}}</p>
+        <div *ngIf="app.hasOwnProperty('availability') && app.link !== undefined">
+          <span *ngFor="let availability of app.availability; index as i">
+            <a *ngIf="availability !== 'fab fa-sourceforge'" target="_blank" href="{{app.link[i]}}"><i class="{{availability}}"></i></a>
+            <a *ngIf="availability === 'fab fa-sourceforge'" target="_blank" href="{{app.link[i]}}">sf</a>
+          </span>
+        </div>
+        <div *ngIf="!app.hasOwnProperty('availability') && app.link !== undefined">
+          <a href="{{app.link[0]}}" target="_blank"><i class="fas fa-download"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g-3">
+    <p>... and this website!</p>
+  </div>
+</div>
+
+
+

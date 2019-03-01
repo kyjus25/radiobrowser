@@ -1,0 +1,19 @@
+footer {
+  background-color: rgba(214, 220, 228, 255);
+  font-size: 14px;
+  color: rgba(0,0,0,0.5);
+  text-align: center;
+}
+footer .container {
+  width: 90vw;
+  margin: auto;
+}
+footer h3 {
+  color: black;
+}
+footer .button a {
+  color: rgba(0,0,0,0.5);
+}
+footer .button:hover {
+  opacity: 0.8;
+}

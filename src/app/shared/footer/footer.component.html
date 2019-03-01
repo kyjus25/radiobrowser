@@ -1,0 +1,36 @@
+<footer>
+  <div class="container">
+    <div class="ui-g">
+      <div class="ui-g-3">
+        <h3>License</h3>
+        MIT
+      </div>
+      <div class="ui-g-3">
+        <h3>Audio Player</h3>
+        <div class="offset" *ngIf="isPlayingStation">
+          <p>{{station.name}}</p>
+          <audio controls autoplay>
+            <source *ngIf="station.codec === 'mp3'" src="{{station.url}}" type="audio/{{station.codec}}">
+            <source *ngIf="station.codec !== 'mp3'" src="{{station.url}}" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <p *ngIf="!isPlayingStation">No station playing</p>
+      </div>
+      <div class="ui-g-3">
+        <h3>Bugtracker</h3>
+        <div style="display: inline-block" class="button">
+          <a target="_blank" href="https://github.com/segler-alex/radiobrowser">Webpage</a>
+        </div> &nbsp;
+        <div style="display: inline-block" class="button">
+          <a target="_blank" href="https://github.com/segler-alex/radiobrowser-api">API Server</a>
+        </div>
+      </div>
+      <div class="ui-g-3">
+        <h3>Legal Note</h3>
+        <p>I'm not in any way responsible for the entries on this webpage, nor am I responsible for the radio stations themselves.</p>
+        <p>This is a community driven effort (like Wikipedia for example).</p>
+      </div>
+    </div>
+  </div>
+</footer>

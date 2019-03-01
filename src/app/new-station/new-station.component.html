@@ -1,0 +1,111 @@
+<div class="page-wrapper">
+  <h1>Create New Station</h1>
+  <p>The information provided here will be released under the public domain.</p>
+  <p>Radio-browser.info only saves links. The content of the streams or the favicons or the homepages of the stations are property of the radio stations themselves.</p>
+
+  <br>
+
+  <span class="ui-float-label">
+    <input [(ngModel)]="name" id="float-input1" type="text" size="80" pInputText required>
+    <label for="float-input1">Name <span style="color: red;">*</span></label>
+  </span>
+  <span *ngIf="!hasContent('name')" class="error">This field is required.</span>
+
+  <br><br>
+
+  <span class="ui-float-label">
+    <input [(ngModel)]="url" id="float-input2" type="text" size="80" pInputText required>
+    <label for="float-input2">URL <span style="color: red;">*</span></label>
+  </span>
+  <span *ngIf="!hasContent('url')" class="error">This field is required.</span>
+
+  <br><br>
+
+  <span class="ui-float-label">
+    <input [(ngModel)]="homepage" id="float-input3" type="text" size="80" pInputText>
+    <label for="float-input3">Homepage</label>
+  </span>
+
+  <br><br>
+
+  <span class="ui-float-label">
+    <input [(ngModel)]="favicon" id="float-input4" type="text" size="80" pInputText>
+    <label for="float-input4">Favicon</label>
+  </span>
+
+  <br>
+
+  <img style="display: block; max-height: 100px;" *ngIf="favicon && favicon.length > 0" src="{{favicon}}">
+
+  <br>
+
+  <span class="ui-float-label">
+    <p-autoComplete
+      size="80"
+      id="float-input5"
+      [(ngModel)]="country"
+      field="name"
+      [forceSelection]="true"
+      [suggestions]="filteredCountries"
+      (completeMethod)="searchCountries($event)"
+    ></p-autoComplete>
+    <label for="float-input5">Country</label>
+  </span>
+
+
+
+
+  <br><br>
+
+  <span class="ui-float-label">
+    <p-autoComplete
+      size="80"
+      id="float-input6"
+      [(ngModel)]="state"
+      field="name"
+      [forceSelection]="true"
+      [suggestions]="filteredStates"
+      (completeMethod)="searchStates($event)"
+    ></p-autoComplete>
+    <label for="float-input6">State</label>
+  </span>
+
+  <br><br>
+
+  <span class="ui-float-label">
+    <p-autoComplete
+      size="80"
+      id="float-input7"
+      [(ngModel)]="language"
+      field="name"
+      [forceSelection]="true"
+      [suggestions]="filteredLanguages"
+      (completeMethod)="searchLanguages($event)"
+    ></p-autoComplete>
+    <label for="float-input7">Language</label>
+  </span>
+
+  <br><br>
+
+  <span class="ui-float-label">
+    <p-autoComplete
+      size="80"
+      id="float-input8"
+      [(ngModel)]="tags"
+      field="name"
+      [dropdown]="true"
+      [multiple]="true"
+      [forceSelection]="true"
+      [suggestions]="filteredTags"
+      (completeMethod)="searchTags($event)"
+    ></p-autoComplete>
+    <label for="float-input8">Tags</label>
+  </span>
+
+  <br><br>
+
+  <button (click)="submitStation()">Submit Station</button>
+
+  <br><br>
+</div>
+
