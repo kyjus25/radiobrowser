@@ -138,12 +138,15 @@
             </div>
           </td>
         </ng-container>
-        <td>
+        <td class="actions">
           <i (click)="playStation(station)" class="fas fa-play-circle"></i>
-          <i class="fas fa-save"></i>
-          <i class="fas fa-home"></i>
+          <a target="_blank" href="http://www.radio-browser.info/webservice/pls/url/{{station.id}}">
+            <i class="fas fa-save"></i>
+          </a>
+          <a target="_blank" href="{{station.homepage}}"><i class="fas fa-home"></i></a>
           <i class="fas fa-like"></i>
           <i class="fas fa-step-backward"></i>
+
         </td>
       </tr>
     </ng-template>

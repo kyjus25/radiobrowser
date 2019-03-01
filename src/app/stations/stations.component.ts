@@ -105,7 +105,7 @@ export class StationsComponent {
       field: 'actions',
       show: true,
       sortable: false,
-      width: '100'
+      width: '125'
     }
   ];
   constructor(
@@ -147,12 +147,9 @@ export class StationsComponent {
       'http://www.radio-browser.info/webservice/json/stations/search', searchParams
     ).subscribe(res => {
       this.tableData = <any[]>res;
+      console.log(res);
       this.loading = false;
-      if (this.tableData.length === 0) {
-        this.noResults = true;
-      } else {
-        this.noResults = false;
-      }
+      this.noResults = this.tableData.length === 0;
     });
   }
 

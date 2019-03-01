@@ -34,3 +34,14 @@
   opacity: 0.8;
   cursor: pointer;
 }
+.actions i {
+  font-size: 20px;
+  margin: 0 2px;
+}
+.actions i:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.actions a {
+  color: #333333;
+}
