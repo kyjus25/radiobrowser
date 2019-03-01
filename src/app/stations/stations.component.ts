@@ -147,7 +147,6 @@ export class StationsComponent {
       'http://www.radio-browser.info/webservice/json/stations/search', searchParams
     ).subscribe(res => {
       this.tableData = <any[]>res;
-      console.log(res);
       this.loading = false;
       this.noResults = this.tableData.length === 0;
     });

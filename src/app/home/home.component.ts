@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  public randomImg = this.randomIntFromInterval(0, 4);
   public searchText: string;
   public stats = {
     countries: 'Loading...',
@@ -240,6 +241,11 @@ export class HomeComponent {
 
   public numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  public randomIntFromInterval(min,max) // min and max included
+  {
+    return Math.floor(Math.random()*(max-min+1)+min);
   }
 
 }

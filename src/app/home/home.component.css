@@ -1,9 +1,23 @@
 #feature {
   height: calc(100vh);
-  background-image: url('/assets/firdaus-roslan-596546-unsplash.jpg');
   background-size: 150%;
   background-position: -20vw -30vw;
   background-repeat: no-repeat;
+}
+#feature.image0 {
+  background-image: url('/assets/firdaus-roslan-596546-unsplash.jpg');
+}
+#feature.image1 {
+  background-image: url('/assets/ben-koorengevel-223854-unsplash.jpg');
+}
+#feature.image2 {
+  background-image: url('/assets/ryan-stefan-473230-unsplash.jpg');
+}
+#feature.image3 {
+  background-image: url('/assets/luca-volpe-1098844-unsplash.jpg');
+}
+#feature.image4 {
+  background-image: url('/assets/alex-kuk-1253621-unsplash.jpg');
 }
 #search {
   position: absolute;
