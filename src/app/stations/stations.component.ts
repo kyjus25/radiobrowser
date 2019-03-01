@@ -136,12 +136,21 @@ export class StationsComponent {
 
   public searchStations() {
     this.loading = true;
+
+    let tagsCommaSeperated = null;
+    if (this.tags.length > 0) {
+      const tagsArray = <any[]><unknown>this.tags;
+      tagsCommaSeperated = tagsArray.map(tag => {
+        return tag.name
+      }).join();
+    }
+
     const searchParams = {
       name: this.name,
       country: this.country,
       state: this.state,
       language: this.language,
-      tagList: this.tags
+      tagList: tagsCommaSeperated
     };
     this.http.post(
       'http://www.radio-browser.info/webservice/json/stations/search', searchParams
