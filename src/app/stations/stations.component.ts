@@ -30,11 +30,11 @@ export class StationsComponent {
   public allTags;
   public filteredTags;
 
-  public name: string;
-  public country: string;
-  public state: string;
-  public language: string;
-  public tags: string;
+  public searchName: string;
+  public searchCountry: string;
+  public searchState: string;
+  public searchLanguage: string;
+  public searchTags: string;
 
   public cols = [
     {
@@ -123,7 +123,7 @@ export class StationsComponent {
     ]).subscribe(([queryParams, countries, states, languages, tags]) => {
 
       if (queryParams.hasOwnProperty('search') && queryParams.search.length > 0) {
-        this.name = queryParams.search;
+        this.searchName = queryParams.search;
         this.searchStations();
         this.searchIsSelected = false;
       }
@@ -137,21 +137,41 @@ export class StationsComponent {
   public searchStations() {
     this.loading = true;
 
+    let countryName = null;
+    let stateName = null;
+    let languageName = null;
     let tagsCommaSeperated = null;
-    if (this.tags.length > 0) {
-      const tagsArray = <any[]><unknown>this.tags;
+
+    if (this.searchCountry !== undefined) {
+      const country: any = this.searchCountry;
+      countryName = country.name;
+    }
+
+    if (this.searchState !== undefined) {
+      const state: any = this.searchState;
+      stateName = state.name;
+    }
+
+    if (this.searchLanguage !== undefined) {
+      const language: any = this.searchLanguage;
+      languageName = language.name;
+    }
+
+    if (this.searchTags !== undefined && this.searchTags.length > 0) {
+      const tagsArray = <any[]><unknown>this.searchTags;
       tagsCommaSeperated = tagsArray.map(tag => {
         return tag.name
       }).join();
     }
 
     const searchParams = {
-      name: this.name,
-      country: this.country,
-      state: this.state,
-      language: this.language,
+      name: this.searchName,
+      country: countryName,
+      state: stateName,
+      language: languageName,
       tagList: tagsCommaSeperated
     };
+    console.log(searchParams);
     this.http.post(
       'http://www.radio-browser.info/webservice/json/stations/search', searchParams
     ).subscribe(res => {
@@ -177,7 +197,7 @@ export class StationsComponent {
     this.filteredLanguages = this.languages.filter(language => language.name.toLowerCase().includes(event.query.toLowerCase()));
   }
 
-  searchTags(event) {
+  searchAllTags(event) {
     this.filteredTags = this.allTags.filter(tag => tag.name.toLowerCase().includes(event.query.toLowerCase()));
   }
 }
