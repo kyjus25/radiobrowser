@@ -87,20 +87,32 @@
 
   <br><br>
 
-  <span class="ui-float-label">
+  <span class="ui-float-label" *ngIf="selectMode">
     <p-autoComplete
-      size="80"
       id="float-input8"
       [(ngModel)]="tags"
       field="name"
       [dropdown]="true"
       [multiple]="true"
-      [forceSelection]="true"
       [suggestions]="filteredTags"
       (completeMethod)="searchTags($event)"
     ></p-autoComplete>
     <label for="float-input8">Tags</label>
   </span>
+
+  <span class="ui-float-label" *ngIf="!selectMode">
+    <input [(ngModel)]="tagsString" id="float-input9" type="text" size="60" pInputText>
+    <label for="float-input9">Tags</label>
+  </span>
+
+  <span class="tags-toggle" *ngIf="selectMode" (click)="this.selectMode = this.selectMode !== true;">
+    Text Mode
+  </span>
+  <span class="tags-toggle" *ngIf="!selectMode" (click)="this.selectMode = this.selectMode !== true;">
+    Select Mode
+  </span>
+
+  <p *ngIf="!selectMode" style="color: red;">You are in text mode. Separate tags with commas, no spaces between tags.</p>
 
   <br><br>
 

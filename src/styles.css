@@ -52,7 +52,7 @@ body {
   vertical-align: middle;
 }
 #float-input8 input {
-  width: calc(582px - 45px);
+  width: calc(582px - 172px);
 }
 
 #accordian-search .container .full-width, #accordian-search .container .ui-autocomplete {

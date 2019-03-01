@@ -17,3 +17,18 @@
   opacity: 0.8;
   cursor: pointer;
 }
+.tags-toggle {
+  background-color: rgba(0, 111, 211, 255);
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  height: 33px;
+  padding: 8px 20px;
+  border-radius: 3px;
+  border: 1px solid #007ad9;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.tags-toggle:hover {
+  opacity: 0.8;
+}

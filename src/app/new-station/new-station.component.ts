@@ -8,6 +8,8 @@ import {combineLatest} from 'rxjs';
   styleUrls: ['./new-station.component.css']
 })
 export class NewStationComponent {
+  public selectMode = true;
+
   public countries;
   public filteredCountries;
 
@@ -28,11 +30,11 @@ export class NewStationComponent {
   public state: string;
   public language: string;
   public tags: string;
+  public tagsString;
 
   constructor(
     private http: HttpClient
   ) {
-
     combineLatest([
       this.http.get('http://www.radio-browser.info/webservice/json/countries'),
       this.http.get('http://www.radio-browser.info/webservice/json/states'),
@@ -51,11 +53,62 @@ export class NewStationComponent {
       this.name !== '' && this.name !== undefined &&
       this.url !== '' && this.url !== undefined
     ) {
+
+      let countryName = null;
+      let stateName = null;
+      let languageName = null;
+      let tagsCommaSeperated = null;
+
+      if (this.country !== undefined) {
+        const country: any = this.country;
+        countryName = country.name;
+      }
+
+      if (this.state !== undefined) {
+        const state: any = this.state;
+        stateName = state.name;
+      }
+
+      if (this.language !== undefined) {
+        const language: any = this.language;
+        languageName = language.name;
+      }
+
+      if (this.tags !== undefined && this.tags.length > 0 && this.selectMode) {
+        const tagsArray = <any[]><unknown>this.tags;
+        tagsCommaSeperated = tagsArray.map(tag => {
+          return tag.name
+        }).join();
+      }
+
+      if (this.tagsString !== undefined && this.tagsString.length > 0 && !this.selectMode) {
+        tagsCommaSeperated = this.tagsString;
+      }
+
+
       const submission = {
         name: this.name,
-        url: this.url
+        url: this.url,
+        homepage: this.homepage,
+        favicon: this.favicon,
+        tags: tagsCommaSeperated,
+        language: languageName,
+        state: stateName,
+        country: countryName
       };
       console.log(submission);
+      this.http.post('http://www.radio-browser.info/webservice/json/add', submission).subscribe(res => {
+        this.name = '';
+        this.url = '';
+        this.homepage = '';
+        this.favicon = '';
+        this.tags = '';
+        this.tagsString = '';
+        this.language = '';
+        this.state = '';
+        this.country = '';
+        console.log(res);
+      });
     }
   }
 
