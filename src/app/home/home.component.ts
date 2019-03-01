@@ -210,6 +210,11 @@ export class HomeComponent {
     private router: Router
   ){
     this.getServerStats();
+
+    const this1 = this;
+    setInterval(function(){
+      this1.randomImg = this1.randomIntFromInterval(0, 4);
+    },10000);
   }
   private getServerStats() {
       this.http.get(
