@@ -36,6 +36,11 @@ export class StationsComponent {
   public searchLanguage: string;
   public searchTags: string;
 
+  public searchClicks = false;
+  public searchVotes = false;
+  public searchPlayed = false;
+  public searchNewness = false;
+
   public cols = [
     {
       header: 'Logo',
@@ -160,16 +165,24 @@ export class StationsComponent {
     if (this.searchTags !== undefined && this.searchTags.length > 0) {
       const tagsArray = <any[]><unknown>this.searchTags;
       tagsCommaSeperated = tagsArray.map(tag => {
-        return tag.name
+        return tag.name;
       }).join();
     }
+
+    let orderBy = null;
+    if (this.searchVotes) { orderBy = 'votes'; }
+    if (this.searchClicks) { orderBy = 'clickcount'; }
+    if (this.searchNewness) { orderBy = 'lastchange'; }
+    if (this.searchPlayed) { orderBy = 'clicktrend'; }
 
     const searchParams = {
       name: this.searchName,
       country: countryName,
       state: stateName,
       language: languageName,
-      tagList: tagsCommaSeperated
+      tagList: tagsCommaSeperated,
+      order: orderBy,
+      reverse: false
     };
     console.log(searchParams);
     this.http.post(
@@ -179,6 +192,14 @@ export class StationsComponent {
       this.loading = false;
       this.noResults = this.tableData.length === 0;
     });
+  }
+
+  public disableOtherSorting(leaveAlone) {
+    this.searchClicks = false;
+    this.searchNewness = false;
+    this.searchPlayed = false;
+    this.searchVotes = false;
+    this['search' + leaveAlone] = true;
   }
 
   public playStation(station) {

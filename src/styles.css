@@ -76,6 +76,10 @@ body {
   font-size: 30px;
 }
 
+.ui-togglebutton {
+  margin-right: 20px !important;
+}
+
 @media screen and (max-width: 1040px) {
   #feature {
     background-size: cover !important;

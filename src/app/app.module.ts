@@ -12,7 +12,7 @@ import {
   DropdownModule,
   InputTextModule,
   MultiSelectModule,
-  PaginatorModule
+  PaginatorModule, ToggleButtonModule
 } from 'primeng/primeng';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FooterComponent} from './shared/footer/footer.component';
@@ -38,6 +38,7 @@ import {StationPlayerService} from './shared/station-player.service';
     AutoCompleteModule,
     BrowserAnimationsModule,
     FormsModule,
+    ToggleButtonModule,
     AccordionModule,
     PaginatorModule,
     MultiSelectModule,

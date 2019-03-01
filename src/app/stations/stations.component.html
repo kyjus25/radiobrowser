@@ -9,6 +9,43 @@
       [selected]="searchIsSelected"
       (keyup.enter)="searchStations()"
     >
+      <div class="container">
+        <p class="label">Sort By</p>
+        <p-toggleButton
+          onLabel="Clicks"
+          offLabel="Clicks"
+          onIcon="pi pi-check"
+          offIcon="pi pi-times"
+          (click)="disableOtherSorting('Clicks')"
+          [(ngModel)]="searchClicks"
+        ></p-toggleButton>
+        <p-toggleButton
+          onLabel="Votes"
+          offLabel="Votes"
+          onIcon="pi pi-check"
+          offIcon="pi pi-times"
+          (click)="disableOtherSorting('Votes')"
+          [(ngModel)]="searchVotes"
+        ></p-toggleButton>
+        <p-toggleButton
+          onLabel="Last Played"
+          offLabel="Last Played"
+          onIcon="pi pi-check"
+          offIcon="pi pi-times"
+          (click)="disableOtherSorting('Played')"
+          [(ngModel)]="searchPlayed"
+        ></p-toggleButton>
+        <p-toggleButton
+          onLabel="Newness"
+          offLabel="Newness"
+          onIcon="pi pi-check"
+          offIcon="pi pi-times"
+          (click)="disableOtherSorting('Newness')"
+          [(ngModel)]="searchNewness"
+        ></p-toggleButton>
+      </div>
+
+      <br>
 
       <div class="container">
         <p class="label">Name</p>
