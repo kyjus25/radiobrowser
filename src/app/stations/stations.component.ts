@@ -184,7 +184,6 @@ export class StationsComponent {
       order: orderBy,
       reverse: false
     };
-    console.log(searchParams);
     this.http.post(
       'http://www.radio-browser.info/webservice/json/stations/search', searchParams
     ).subscribe(res => {

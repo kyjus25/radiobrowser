@@ -22,6 +22,7 @@ import {StationsComponent} from './stations/stations.component';
 import {FaqsComponent} from './faqs/faqs.component';
 import {TableModule} from 'primeng/table';
 import {StationPlayerService} from './shared/station-player.service';
+import {StationHistoryComponent} from './station-history/station-history.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {StationPlayerService} from './shared/station-player.service';
     StationsComponent,
     FaqsComponent,
     FooterComponent,
-    NewStationComponent
+    NewStationComponent,
+    StationHistoryComponent
   ],
   imports: [
     BrowserModule,
