@@ -44,6 +44,8 @@ export class StationsComponent {
   public searchVotes = false;
   public searchPlayed = false;
   public searchNewness = false;
+  public searchBroken = false;
+  public searchImprovable = false;
 
   public cols = [
     {
@@ -137,6 +139,21 @@ export class StationsComponent {
         this.searchStations();
         this.searchIsSelected = false;
       }
+
+      if (queryParams.hasOwnProperty('broken')) {
+        this.searchName = '';
+        this.searchBroken = true;
+        this.showBroken();
+        this.searchIsSelected = false;
+      }
+
+      if (queryParams.hasOwnProperty('improvable')) {
+        this.searchName = '';
+        this.searchImprovable = true;
+        this.showImprovable();
+        this.searchIsSelected = false;
+      }
+
       this.countries = countries;
       this.states = states;
       this.languages = languages;
@@ -146,6 +163,8 @@ export class StationsComponent {
 
   public searchStations() {
     this.loading = true;
+    this.searchBroken = false;
+    this.searchImprovable = false;
 
     let countryName = null;
     let stateName = null;
@@ -199,12 +218,55 @@ export class StationsComponent {
     });
   }
 
-  public disableOtherSorting(leaveAlone) {
+  public showBroken() {
+    if (this.searchBroken) {
+      this.disableOtherSorting('Broken');
+      this.wipeSearches();
+      this.http.get(
+        'http://www.radio-browser.info/webservice/json/stations/broken'
+      ).subscribe(res => {
+        this.tableData = <any[]>res;
+        this.tableData.map(data => data.votes = parseInt(data.votes, 10));
+        this.loading = false;
+        this.noResults = this.tableData.length === 0;
+      });
+    }
+  }
+
+  public showImprovable() {
+    if (this.searchImprovable) {
+      this.disableOtherSorting('Improvable');
+      this.wipeSearches();
+      this.http.get(
+        'http://www.radio-browser.info/webservice/json/stations/improvable'
+      ).subscribe(res => {
+        this.tableData = <any[]>res;
+        this.tableData.map(data => data.votes = parseInt(data.votes, 10));
+        this.loading = false;
+        this.noResults = this.tableData.length === 0;
+      });
+    }
+  }
+
+
+  public wipeSearches() {
+    this.searchName = '';
+    this.searchCountry = '';
+    this.searchState = '';
+    this.searchLanguage = '';
+    this.searchTags = '';
+  }
+
+  public disableOtherSorting(leaveAlone?) {
     this.searchClicks = false;
     this.searchNewness = false;
     this.searchPlayed = false;
     this.searchVotes = false;
-    this['search' + leaveAlone] = true;
+    this.searchBroken = false;
+    this.searchImprovable = false;
+    if (leaveAlone) {
+      this['search' + leaveAlone] = true;
+    }
   }
 
   public getKeys(station) {

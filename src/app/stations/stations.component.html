@@ -39,6 +39,29 @@
       (keyup.enter)="searchStations()"
     >
       <div class="container">
+        <p class="label">Show Only</p>
+        <p-toggleButton
+          onLabel="Broken"
+          offLabel="Broken"
+          onIcon="pi pi-check"
+          offIcon="pi pi-times"
+          (click)="showBroken()"
+          [(ngModel)]="searchBroken"
+        ></p-toggleButton>
+
+        <p-toggleButton
+          onLabel="Improvable"
+          offLabel="Improvable"
+          onIcon="pi pi-check"
+          offIcon="pi pi-times"
+          (click)="showImprovable()"
+          [(ngModel)]="searchImprovable"
+        ></p-toggleButton>
+      </div>
+
+      <br>
+
+      <div class="container">
         <p class="label">Sort By</p>
         <p-toggleButton
           onLabel="Clicks"
