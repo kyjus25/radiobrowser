@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {FooterComponent} from '../shared/footer/footer.component';
 import {StationPlayerService} from '../shared/station-player.service';
 import {combineLatest} from 'rxjs';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-stations',
@@ -110,12 +111,13 @@ export class StationsComponent {
       field: 'actions',
       show: true,
       sortable: false,
-      width: '125'
+      width: '150'
     }
   ];
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
+    private messageService: MessageService,
     private player: StationPlayerService
   ) {
 
@@ -203,6 +205,12 @@ export class StationsComponent {
 
   public playStation(station) {
     this.player.playSong(station);
+  }
+
+  public voteStation(station) {
+    this.http.get('http://www.radio-browser.info/webservice/json/vote/' + station.id).subscribe(res => {
+      this.messageService.add({severity: 'success', summary: 'Vote Added', detail: 'Thanks for voting for ' + station.name});
+    });
   }
 
   searchCountries(event) {

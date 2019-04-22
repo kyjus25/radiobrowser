@@ -10,7 +10,7 @@ import {
   AccordionModule,
   AutoCompleteModule,
   DropdownModule,
-  InputTextModule,
+  InputTextModule, MessageService,
   MultiSelectModule,
   PaginatorModule, ToggleButtonModule
 } from 'primeng/primeng';
@@ -23,6 +23,7 @@ import {FaqsComponent} from './faqs/faqs.component';
 import {TableModule} from 'primeng/table';
 import {StationPlayerService} from './shared/station-player.service';
 import {StationHistoryComponent} from './station-history/station-history.component';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -44,13 +45,14 @@ import {StationHistoryComponent} from './station-history/station-history.compone
     AccordionModule,
     PaginatorModule,
     MultiSelectModule,
+    ToastModule,
     TableModule,
     InputTextModule,
     HttpClientModule,
     DropdownModule,
     Router
   ],
-  providers: [StationPlayerService],
+  providers: [StationPlayerService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

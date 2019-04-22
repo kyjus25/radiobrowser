@@ -1,7 +1,17 @@
+<p-toast></p-toast>
+
 <div class="page-wrapper">
   <h1>Stations</h1>
 
   <p>To view stations, please enter a search term into at least one of the fields below.</p>
+
+  <div *ngIf="searchName && (tableData && !noResults)">
+    <p>Save current list as playlist for your audio player:
+      <a target="_blank" href="http://www.radio-browser.info/webservice/pls/stations/search?name={{searchName}}&limit=100">PLS</a>,
+      <a target="_blank" href="http://www.radio-browser.info/webservice/m3u/stations/search?name={{searchName}}&limit=100">M3U</a>,
+      <a target="_blank" href="http://www.radio-browser.info/webservice/xspf/stations/search?name={{searchName}}&limit=100">XSPF</a>
+    </p>
+  </div>
 
   <p-accordion id="accordian-search">
     <p-accordionTab
@@ -185,7 +195,7 @@
             <i class="fas fa-save"></i>
           </a>
           <a target="_blank" href="{{station.homepage}}"><i class="fas fa-home"></i></a>
-          <i class="fas fa-like"></i>
+          <i (click)="voteStation(station)" class="fas fa-thumbs-up"></i>
           <i class="fas fa-step-backward" routerLink="/stations/history/{{station.stationuuid}}"></i>
         </td>
       </tr>
