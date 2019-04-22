@@ -194,7 +194,6 @@ export class StationsComponent {
     ).subscribe(res => {
       this.tableData = <any[]>res;
       this.tableData.map(data => data.votes = parseInt(data.votes, 10));
-      console.log(this.tableData);
       this.loading = false;
       this.noResults = this.tableData.length === 0;
     });

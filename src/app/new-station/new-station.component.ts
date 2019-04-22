@@ -77,7 +77,7 @@ export class NewStationComponent {
       if (this.tags !== undefined && this.tags.length > 0 && this.selectMode) {
         const tagsArray = <any[]><unknown>this.tags;
         tagsCommaSeperated = tagsArray.map(tag => {
-          return tag.name
+          return tag.name;
         }).join();
       }
 
