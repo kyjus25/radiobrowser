@@ -190,6 +190,7 @@ export class StationsComponent {
       'http://www.radio-browser.info/webservice/json/stations/search', searchParams
     ).subscribe(res => {
       this.tableData = <any[]>res;
+      this.tableData.map(data => data.votes = parseInt(data.votes, 10));
       this.loading = false;
       this.noResults = this.tableData.length === 0;
     });
