@@ -14,13 +14,12 @@ export class FooterComponent {
     private player: StationPlayerService
   ) {
     this.player.stationReplaySubject.subscribe(res => {
-      console.log('update');
       const this1 = this;
       this.isPlayingStation = false;
       setTimeout(function(){
         this1.station = res;
         this1.isPlayingStation = true;
-      },1000);
+      }, 1000);
     });
   }
 }

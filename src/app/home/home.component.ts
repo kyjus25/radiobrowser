@@ -208,13 +208,13 @@ export class HomeComponent {
   constructor(
     private http: HttpClient,
     private router: Router
-  ){
+  ) {
     this.getServerStats();
 
     const this1 = this;
-    setInterval(function(){
+    setInterval(function() {
       this1.randomImg = this1.randomIntFromInterval(0, 4);
-    },10000);
+    }, 10000);
   }
   private getServerStats() {
       this.http.get(
@@ -224,33 +224,16 @@ export class HomeComponent {
       });
   }
 
-  public getSearchResults(event) {
-    if(event.query.length > 0 && event.query === this.searchText) {
-      this.http.get(
-        'http://www.radio-browser.info/webservice/json/stations/byname/' + event.query
-      ).subscribe(res => {
-        const returnArray = <any[]>res;
-        if (returnArray.length <= 50) {
-          this.searchResults = <any[]>res;
-          console.log(res);
-        } else {
-          this.searchResults = [];
-        }
-      });
-    }
-  }
-
   public goToStations() {
     this.router.navigate(['/stations'], { queryParams: { search: this.searchText } });
   }
 
   public numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
-  public randomIntFromInterval(min,max) // min and max included
-  {
-    return Math.floor(Math.random()*(max-min+1)+min);
+  public randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
 }
