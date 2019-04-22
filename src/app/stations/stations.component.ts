@@ -15,6 +15,9 @@ export class StationsComponent {
   public loading = false;
   public noResults = true;
 
+  public displayStationModal = false;
+  public displayedStation;
+
   public tableData;
   public searchIsSelected = true;
   public visibleColumns = [];
@@ -111,7 +114,7 @@ export class StationsComponent {
       field: 'actions',
       show: true,
       sortable: false,
-      width: '150'
+      width: '170'
     }
   ];
   constructor(
@@ -191,6 +194,7 @@ export class StationsComponent {
     ).subscribe(res => {
       this.tableData = <any[]>res;
       this.tableData.map(data => data.votes = parseInt(data.votes, 10));
+      console.log(this.tableData);
       this.loading = false;
       this.noResults = this.tableData.length === 0;
     });
@@ -204,6 +208,10 @@ export class StationsComponent {
     this['search' + leaveAlone] = true;
   }
 
+  public getKeys(station) {
+    return Object.keys(station);
+  }
+
   public playStation(station) {
     this.player.playSong(station);
   }
@@ -212,6 +220,11 @@ export class StationsComponent {
     this.http.get('http://www.radio-browser.info/webservice/json/vote/' + station.id).subscribe(res => {
       this.messageService.add({severity: 'success', summary: 'Vote Added', detail: 'Thanks for voting for ' + station.name});
     });
+  }
+
+  public displayStation(station) {
+    this.displayStationModal = true;
+    this.displayedStation = station;
   }
 
   searchCountries(event) {

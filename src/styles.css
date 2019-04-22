@@ -80,6 +80,10 @@ body {
   margin-right: 20px !important;
 }
 
+#station-modal .ui-dialog {
+  max-width: 1000px;
+}
+
 @media screen and (max-width: 1040px) {
   #feature {
     background-size: cover !important;

@@ -45,3 +45,14 @@
 .actions a {
   color: #333333;
 }
+#station-modal img {
+  width: 100%;
+  height: auto;
+}
+#station-modal p {
+  font-size: 12px;
+}
+#station-modal .ui-button {
+  padding: 5px 10px;
+  border-radius: 5px;
+}

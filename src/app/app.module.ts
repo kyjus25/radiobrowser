@@ -8,7 +8,7 @@ import {HomeComponent} from './home/home.component';
 import {FormsModule} from '@angular/forms';
 import {
   AccordionModule,
-  AutoCompleteModule,
+  AutoCompleteModule, DialogModule,
   DropdownModule,
   InputTextModule, MessageService,
   MultiSelectModule,
@@ -39,6 +39,7 @@ import {ToastModule} from 'primeng/toast';
   imports: [
     BrowserModule,
     AutoCompleteModule,
+    DialogModule,
     BrowserAnimationsModule,
     FormsModule,
     ToggleButtonModule,
