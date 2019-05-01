@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 4200;
 const icy = require('icy');
+const request = require('request');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -10,27 +11,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // console.log(req.headers['x-openerp-session-id']);
 
 app.get('/icy', (req, res) => {
-  try {
-    icy.get(req.query.url, function (icyResponse) {
-      // log any "metadata" events that happen
+
+  async function f() {
+    const icyResponse = await icy.get(req.query.url, function (icyResponse) {
       icyResponse.once('metadata', function (metadata) {
         var parsed = icy.parse(metadata);
         console.error(parsed);
-        res.send(parsed)
+        return Promise.resolve(parsed);
       });
-      icyResponse.once('timeout', function (metadata) {
-        res.send({});
-      });
-      icyResponse.once('end', function (metadata) {
-        res.send({});
-      });
-      setTimeout(function(){ res.send({}); }, 3000);
+      setTimeout(function(){ return Promise.resolve({}) }, 3000);
     });
+    let result = await icyResponse; // wait till the promise resolves (*)
+    res.send(result);
   }
-  catch(err) {
-    console.log();
-    res.send({});
-  }
+  f().catch(error => console.log('ERRPR', error));
+
+
+
+
 });
 
 process.on('uncaughtException', function (err) {
