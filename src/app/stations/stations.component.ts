@@ -60,6 +60,13 @@ export class StationsComponent {
       field: 'votes',
       show: true,
       sortable: true,
+      width: '50'
+    },
+    {
+      header: 'Playing',
+      field: 'playing',
+      show: true,
+      sortable: true,
       width: 'auto'
     },
     {
@@ -213,9 +220,23 @@ export class StationsComponent {
     ).subscribe(res => {
       this.tableData = <any[]>res;
       this.tableData.map(data => data.votes = parseInt(data.votes, 10));
+      this.getMetadata(0, this.tableData.length);
       this.loading = false;
       this.noResults = this.tableData.length === 0;
     });
+  }
+
+  private getMetadata(current, total) {
+    console.log('getting meta' + current);
+    if (current <= total) {
+      this.http.get('/icy?url=' + this.tableData[current].url).subscribe(icy => {
+        if (icy.hasOwnProperty('StreamTitle') && icy['StreamTitle'] !== '') {
+          this.tableData[current].playing = icy['StreamTitle'];
+        }
+        current++;
+        this.getMetadata(current, total);
+      });
+    }
   }
 
   public showBroken() {

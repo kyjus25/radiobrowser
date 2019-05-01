@@ -10,6 +10,7 @@
         <h3>Audio Player</h3>
         <div class="offset" *ngIf="isPlayingStation">
           <p>{{station.name}}</p>
+          <p *ngIf="currentlyPlaying !== null">{{currentlyPlaying}}</p>
           <audio controls autoplay>
             <source *ngIf="station.codec === 'mp3'" src="{{station.url}}" type="audio/{{station.codec}}">
             <source *ngIf="station.codec !== 'mp3'" src="{{station.url}}" type="audio/mp4">
