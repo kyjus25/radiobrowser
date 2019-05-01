@@ -2,9 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const port = 4200;
-const icy = require('icy');
-const request = require('request');
-const util = require('util')
+const child_process = require('child_process');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -12,24 +10,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // console.log(req.headers['x-openerp-session-id']);
 
 app.get('/icy', (req, res) => {
-
-  async function f() {
-    const icyResponse = await icy.get(req.query.url, function (icyResponse) {
-      icyResponse.once('metadata', function (metadata) {
-        var parsed = icy.parse(metadata);
-        console.error(parsed);
-        return Promise.resolve(parsed);
-      });
-      setTimeout(function(){ return Promise.resolve({}) }, 3000);
-    });
-    let result = await icyResponse; // wait till the promise resolves (*)
-    res.send(result);
-  }
-  f().catch(error => console.log('ERRPR', util.inspect(error)));
-
-
-
-
+  child_process.exec('streamripper ' + req.query.url + ' -A -a', function(error, stdout, stderr){
+    res.send(JSON.stringify(stdout));
+  });
 });
 
 process.on('uncaughtException', function (err) {
