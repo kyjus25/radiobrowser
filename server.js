@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const port = 4200;
 const icy = require('icy');
 const request = require('request');
+const util = require('util')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,7 +25,7 @@ app.get('/icy', (req, res) => {
     let result = await icyResponse; // wait till the promise resolves (*)
     res.send(result);
   }
-  f().catch(error => console.log('ERRPR', error));
+  f().catch(error => console.log('ERRPR', util.inspect(error)));
 
 
 
