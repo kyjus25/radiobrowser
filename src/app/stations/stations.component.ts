@@ -228,10 +228,10 @@ export class StationsComponent {
 
   private getMetadata(current, total) {
     console.log('getting meta' + current);
-    if (current <= total) {
+    if (current < total) {
       this.http.get('/icy?url=' + this.tableData[current].url).subscribe(icy => {
-        if (icy.hasOwnProperty('StreamTitle') && icy['StreamTitle'] !== '') {
-          this.tableData[current].playing = icy['StreamTitle'];
+        if (icy.hasOwnProperty('icy-name') && icy['icy-name'] !== '') {
+          this.tableData[current].playing = icy['icy-name'];
         }
         current++;
         this.getMetadata(current, total);
