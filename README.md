@@ -1,6 +1,10 @@
 # radiobrowser
 
-website frontend with angular 2.x for [radio-browser api](https://github.com/segler-alex/radiobrowser-api)
+website frontend with angular 7.x for [radio-browser api](https://github.com/segler-alex/radiobrowser-api)
+
+## Installation
+
+- You will need `php-cli` to handle ICY metadata queries
 
 ## Installation
 
@@ -15,4 +19,3 @@ Please note: API calls are proxied to **production environment** at <http://www.
 - `npm start`
 - Visit your app at <http://localhost:4200/>
 
-There is also a Dockerfile
