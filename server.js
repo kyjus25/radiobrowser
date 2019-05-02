@@ -2,14 +2,10 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const port = 4200;
-const request = require('request');
-const fs = require('fs');
 const child_process = require('child_process');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// console.log(req.headers['x-openerp-session-id']);
 
 app.get('/icy', (req, res) => {
   const options = {
