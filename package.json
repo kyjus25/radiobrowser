@@ -5,7 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run build; node server.js;",
-    "build": "ng build"
+    "build": "ng build",
+    "start-prod": "node server.js"
   },
   "dependencies": {
     "@angular/animations": "~7.0.4",
