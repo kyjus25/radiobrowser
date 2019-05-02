@@ -25,17 +25,17 @@ export class StationPlayerService {
   public getMetadata(url) {
     const this1 = this;
     clearInterval(this.interval);
-    this1.http.get('/icy?url=' + url).subscribe(res => {
-      if (res.hasOwnProperty('StreamTitle')) {
-        this.stationCurrentlyPlaying.next(res['StreamTitle']);
+    this1.http.get('/icy?url=' + url).subscribe(icy => {
+      if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+        this1.stationCurrentlyPlaying.next( icy['icy-title'] );
       } else {
-        this.stationCurrentlyPlaying.next(null);
+        this1.stationCurrentlyPlaying.next(null);
       }
     });
     this.interval = setInterval(function() {
-      this1.http.get('/icy?url=' + url).subscribe(res => {
-        if (res.hasOwnProperty('StreamTitle')) {
-          this1.stationCurrentlyPlaying.next(res['StreamTitle']);
+      this1.http.get('/icy?url=' + url).subscribe(icy => {
+        if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+          this1.stationCurrentlyPlaying.next( icy['icy-title'] );
         } else {
           this1.stationCurrentlyPlaying.next(null);
         }
