@@ -60,7 +60,7 @@ export class StationsComponent {
       field: 'votes',
       show: true,
       sortable: true,
-      width: 'auto'
+      width: '50'
     },
     {
       header: 'Name',
@@ -213,6 +213,13 @@ export class StationsComponent {
     ).subscribe(res => {
       this.tableData = <any[]>res;
       this.tableData.map(data => data.votes = parseInt(data.votes, 10));
+      this.tableData.forEach(data => {
+        this.http.get('/icy?url=' + data.url).subscribe(icy => {
+          if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+            data.playing = icy['icy-title'];
+          }
+        });
+      });
       this.loading = false;
       this.noResults = this.tableData.length === 0;
     });

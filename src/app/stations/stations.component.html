@@ -193,7 +193,7 @@
     <ng-template pTemplate="header">
       <tr>
         <ng-container *ngFor="let col of cols">
-          <th *ngIf="col.show" [pSortableColumn]="col.field" width="{{col.width}}">
+          <th *ngIf="col.show" [pSortableColumn]="col.field" width="{{col.width}}" [id]="col.header">
             {{col.header}}
             <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
           </th>
@@ -221,10 +221,15 @@
             <div *ngIf="col.field === 'logo'">
               <div class="img-container"><img class="favicon" src="{{station.favicon}}"></div>
             </div>
+            <div *ngIf="col.field === 'name'">
+              {{station.name}}<br>
+              <span class="playing" *ngIf="station.playing"><b>currently playing:</b> {{station.playing}}</span>
+            </div>
             <div
               *ngIf="
               col.field !== 'stream-info' &&
               col.field !== 'logo' &&
+              col.field !== 'name' &&
               col.field !== 'tags'">
               {{station[col.field]}}
             </div>

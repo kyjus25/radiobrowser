@@ -17,3 +17,17 @@ footer .button a {
 footer .button:hover {
   opacity: 0.8;
 }
+footer .playing {
+  font-size: 12px;
+  color: rgba(0,0,0,0.4);
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: -14px;
+  margin-bottom: 14px;
+}
+
+footer .offset {
+  text-align: center;
+}

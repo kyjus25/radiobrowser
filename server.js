@@ -1,0 +1,36 @@
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const port = 4200;
+const request = require('request');
+const fs = require('fs');
+const child_process = require('child_process');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// console.log(req.headers['x-openerp-session-id']);
+
+app.get('/icy', (req, res) => {
+  const options = {
+    timeout: 10000,
+    killSignal: 'SIGKILL'
+  };
+  child_process.exec('php icy.php ' + req.query.url, options, function(error, stdout, stderr){
+    if (stdout !== '') {
+      res.send({'icy-title': stdout});
+    } else {
+      res.send({});
+    }
+  }, error => {
+    res.send({});
+  });
+});
+
+process.on('uncaughtException', function (err) {
+  console.log('Caught exception: ', err);
+});
+
+app.listen(port, () => console.log(`Community Radio Browser frontend listening on port ${port}!`));
+
+app.use( express.static(__dirname + '/dist/radiobrowser' ) );
