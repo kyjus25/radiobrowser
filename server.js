@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const port = 4200;
 const request = require('request');
 const fs = require('fs');
+const child_process = require('child_process');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -12,51 +13,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/icy', (req, res) => {
   const options = {
-    url: req.query.url,
-    headers: {
-      'Icy-MetaData': '1'
-    }
+    timeout: 10000,
+    killSignal: 'SIGKILL'
   };
-  request.head(options, (error, response, body) => {
-      if (error) {
-        res.send({});
-      } else {
-        // console.log(response.headers);
-        if (response.headers.hasOwnProperty('icy-metaint')) {
-          console.log(req.query.url, response.headers['icy-metaint']);
-
-          const fileName = Buffer.from(req.query.url).toString('base64');
-          const bufferSize = parseInt(response.headers['icy-metaint']);
-
-          // request({url: req.query.url, encoding:null}).pipe(fs.createWriteStream('streams/' + fileName));
-          fs.open('streams/' + fileName, 'r', function(status, fd) {
-            if (status) {
-              console.log(status.message);
-              return;
-            }
-            // var buffer = Buffer.alloc(bufferSize);
-            // fs.read(fd, buffer, 0, bufferSize * 16, 0, function(err, num) {
-            //   console.log(buffer.toString('utf8', 0, num));
-            // });
-          });
-
-
-
-
-
-
-          res.send({'icy-name': response.headers['icy-name']});
-        } else {
-          res.send({});
-        }
-
-
-
-
-
-
-      }
-    });
+  child_process.exec('php icy.php ' + req.query.url, options, function(error, stdout, stderr){
+    if (stdout !== '') {
+      res.send({'icy-title': stdout});
+    } else {
+      res.send({});
+    }
+  }, error => {
+    res.send({});
+  });
 });
 
 process.on('uncaughtException', function (err) {

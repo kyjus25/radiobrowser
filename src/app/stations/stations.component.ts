@@ -63,13 +63,6 @@ export class StationsComponent {
       width: '50'
     },
     {
-      header: 'Playing',
-      field: 'playing',
-      show: true,
-      sortable: true,
-      width: 'auto'
-    },
-    {
       header: 'Name',
       field: 'name',
       show: true,
@@ -220,23 +213,16 @@ export class StationsComponent {
     ).subscribe(res => {
       this.tableData = <any[]>res;
       this.tableData.map(data => data.votes = parseInt(data.votes, 10));
-      this.getMetadata(0, this.tableData.length);
+      this.tableData.forEach(data => {
+        this.http.get('/icy?url=' + data.url).subscribe(icy => {
+          if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+            data.playing = icy['icy-title'];
+          }
+        });
+      });
       this.loading = false;
       this.noResults = this.tableData.length === 0;
     });
-  }
-
-  private getMetadata(current, total) {
-    console.log('getting meta' + current);
-    if (current < total) {
-      this.http.get('/icy?url=' + this.tableData[current].url).subscribe(icy => {
-        if (icy.hasOwnProperty('icy-name') && icy['icy-name'] !== '') {
-          this.tableData[current].playing = icy['icy-name'];
-        }
-        current++;
-        this.getMetadata(current, total);
-      });
-    }
   }
 
   public showBroken() {
