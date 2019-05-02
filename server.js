@@ -18,7 +18,11 @@ app.get('/icy', (req, res) => {
   };
   child_process.exec('php icy.php ' + req.query.url, options, function(error, stdout, stderr){
     if (stdout !== '') {
-      res.send({'icy-title': stdout});
+      if (!stdout.includes('fopen')) {
+        res.send({'icy-title': stdout});
+      } else {
+        res.send({});
+      }
     } else {
       res.send({});
     }
