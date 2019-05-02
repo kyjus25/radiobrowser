@@ -3,8 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {FooterComponent} from '../shared/footer/footer.component';
 import {StationPlayerService} from '../shared/station-player.service';
-import {combineLatest} from 'rxjs';
+import {combineLatest, Subject} from 'rxjs';
 import {MessageService} from 'primeng/api';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-stations',
@@ -16,6 +17,7 @@ export class StationsComponent {
   public noResults = true;
 
   public interval;
+  public icyUnsubscribe: Subject<void> = new Subject<void>();
 
   public displayStationModal = false;
   public displayedStation;
@@ -215,11 +217,13 @@ export class StationsComponent {
     ).subscribe(res => {
       this.tableData = <any[]>res;
       this.tableData.map(data => data.votes = parseInt(data.votes, 10));
+      this.icyUnsubscribe.next();
+      this.icyUnsubscribe.complete();
 
       const this1 = this;
       clearInterval(this.interval);
       this.tableData.forEach(data => {
-        this.http.get('/icy?url=' + data.url).subscribe(icy => {
+        this.http.get('/icy?url=' + data.url).pipe( takeUntil(this.icyUnsubscribe) ).subscribe(icy => {
           if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
             data.playing = icy['icy-title'];
           }
@@ -227,7 +231,7 @@ export class StationsComponent {
       });
       this.interval = setInterval(function() {
         this1.tableData.forEach(data => {
-          this1.http.get('/icy?url=' + data.url).subscribe(icy => {
+          this1.http.get('/icy?url=' + data.url).pipe( takeUntil(this1.icyUnsubscribe) ).subscribe(icy => {
             if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
               data.playing = icy['icy-title'];
             }
