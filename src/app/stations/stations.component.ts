@@ -15,6 +15,8 @@ export class StationsComponent {
   public loading = false;
   public noResults = true;
 
+  public interval;
+
   public displayStationModal = false;
   public displayedStation;
 
@@ -213,6 +215,9 @@ export class StationsComponent {
     ).subscribe(res => {
       this.tableData = <any[]>res;
       this.tableData.map(data => data.votes = parseInt(data.votes, 10));
+
+      const this1 = this;
+      clearInterval(this.interval);
       this.tableData.forEach(data => {
         this.http.get('/icy?url=' + data.url).subscribe(icy => {
           if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
@@ -220,6 +225,15 @@ export class StationsComponent {
           }
         });
       });
+      this.interval = setInterval(function() {
+        this1.tableData.forEach(data => {
+          this1.http.get('/icy?url=' + data.url).subscribe(icy => {
+            if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+              data.playing = icy['icy-title'];
+            }
+          });
+        });
+      }, 60000);
       this.loading = false;
       this.noResults = this.tableData.length === 0;
     });
