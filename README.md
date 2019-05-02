@@ -2,9 +2,9 @@
 
 website frontend with angular 7.x for [radio-browser api](https://github.com/segler-alex/radiobrowser-api)
 
-## Installation
+## Dependencies
 
-- You will need `php-cli` to handle ICY metadata queries
+- You will need `php-cli` to handle ICY metadata queries. MacOS should come with it by default. Run `php -v` to see if you have it installed. 
 
 ## Installation
 
