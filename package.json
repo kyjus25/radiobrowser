@@ -6,7 +6,9 @@
     "ng": "ng",
     "start": "npm run build; node server.js;",
     "build": "ng build",
-    "start-prod": "node server.js"
+    "start-prod": "node server.js",
+    "start-pm2": "pm2 start server.js",
+    "stop-pm2": "pm2 delete server"
   },
   "dependencies": {
     "@angular/animations": "~7.0.4",
