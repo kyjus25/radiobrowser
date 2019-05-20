@@ -169,6 +169,7 @@ export class StationsComponent {
     this.loading = true;
     this.searchBroken = false;
     this.searchImprovable = false;
+    this.searchIsSelected = false;
 
     let countryName = null;
     let stateName = null;
@@ -194,7 +195,7 @@ export class StationsComponent {
       const tagsArray = <any[]><unknown>this.searchTags;
       tagsCommaSeperated = tagsArray.map(tag => {
         return tag.name;
-      }).join();
+      });
     }
 
     let orderBy = null;
@@ -212,9 +213,11 @@ export class StationsComponent {
       order: orderBy,
       reverse: false
     };
+    console.log(searchParams);
     this.http.post(
       'http://www.radio-browser.info/webservice/json/stations/search', searchParams
     ).subscribe(res => {
+      console.log(res);
       this.tableData = <any[]>res;
       this.tableData.map(data => data.votes = parseInt(data.votes, 10));
       this.icyUnsubscribe.next();

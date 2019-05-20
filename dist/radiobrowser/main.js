@@ -1244,6 +1244,7 @@ var StationsComponent = /** @class */ (function () {
         this.loading = true;
         this.searchBroken = false;
         this.searchImprovable = false;
+        this.searchIsSelected = false;
         var countryName = null;
         var stateName = null;
         var languageName = null;
@@ -1264,7 +1265,7 @@ var StationsComponent = /** @class */ (function () {
             var tagsArray = this.searchTags;
             tagsCommaSeperated = tagsArray.map(function (tag) {
                 return tag.name;
-            }).join();
+            });
         }
         var orderBy = null;
         if (this.searchVotes) {
@@ -1288,7 +1289,9 @@ var StationsComponent = /** @class */ (function () {
             order: orderBy,
             reverse: false
         };
+        console.log(searchParams);
         this.http.post('http://www.radio-browser.info/webservice/json/stations/search', searchParams).subscribe(function (res) {
+            console.log(res);
             _this.tableData = res;
             _this.tableData.map(function (data) { return data.votes = parseInt(data.votes, 10); });
             _this.icyUnsubscribe.next();
