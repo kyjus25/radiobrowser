@@ -349,6 +349,12 @@ var HomeComponent = /** @class */ (function () {
                 link: ['https://github.com/haecker-felix/gradio']
             },
             {
+                icon: 'https://gitlab.gnome.org/uploads/-/system/project/avatar/5767/de.haeckerfelix.Gradio.png?width=64',
+                name: 'Shortwave',
+                description: 'Gradio Successor',
+                link: ['https://gitlab.gnome.org/World/Shortwave']
+            },
+            {
                 icon: 'https://kodi.tv/sites/default/themes/kodi/icon.png',
                 name: 'Radio-Browser',
                 description: 'Kodi/XBMC Plugin',
