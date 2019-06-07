@@ -7,15 +7,15 @@
         Additional Questions? <a href="mailto:segler_alex@web.de">Email Me</a>
       </div>
       <div class="ui-g-3">
-        <h3>Audio Player</h3>
+        <h3>{{stationType ? stationType : 'Audio'}} Player</h3>
         <div class="offset" *ngIf="isPlayingStation">
           <p class="name">{{station.name}}</p>
-          <ng-container *ngIf="stationType === 'VIDEO'">
-            <video controls autoplay>
+          <ng-container *ngIf="stationType === 'Video'">
+            <video controls autoplay #video>
               <source src="{{station.url}}" type="application/x-mpegURL">
             </video>
           </ng-container>
-          <ng-container *ngIf="stationType === 'AUDIO'">
+          <ng-container *ngIf="stationType === 'Audio'">
             <marquee class="playing" *ngIf="currentlyPlaying !== null">{{currentlyPlaying}}</marquee>
             <audio controls autoplay>
               <source *ngIf="station.codec === 'mp3'" src="{{station.url}}" type="audio/{{station.codec}}">

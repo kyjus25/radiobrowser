@@ -4,6 +4,10 @@ footer {
   color: rgba(0,0,0,0.5);
   text-align: center;
 }
+footer video {
+  width: 100%;
+  height: auto;
+}
 footer .container {
   width: 90vw;
   margin: auto;

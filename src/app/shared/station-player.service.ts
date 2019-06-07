@@ -21,9 +21,9 @@ export class StationPlayerService {
     this.isStationPlayingReplaySubject.next(this.isStationPlaying);
     this.stationReplaySubject.next(station);
     if (station.url.includes('m3u8')) {
-      this.stationType.next('VIDEO');
+      this.stationType.next('Video');
     } else {
-      this.stationType.next('AUDIO');
+      this.stationType.next('Audio');
       this.getMetadata(station.url);
     }
   }

@@ -729,7 +729,7 @@ var Router = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "footer {\n  background-color: rgba(214, 220, 228, 255);\n  font-size: 14px;\n  color: rgba(0,0,0,0.5);\n  text-align: center;\n}\nfooter .container {\n  width: 90vw;\n  margin: auto;\n}\nfooter h3 {\n  color: black;\n}\nfooter .button a {\n  color: rgba(0,0,0,0.5);\n}\nfooter .button:hover {\n  opacity: 0.8;\n}\nfooter .playing {\n  font-size: 12px;\n  color: rgba(0,0,0,0.4);\n  white-space: nowrap;\n  display: block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin-top: -14px;\n  margin-bottom: 14px;\n}\nfooter .offset {\n  text-align: center;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL2Zvb3Rlci9mb290ZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDBDQUEwQztFQUMxQyxlQUFlO0VBQ2Ysc0JBQXNCO0VBQ3RCLGtCQUFrQjtBQUNwQjtBQUNBO0VBQ0UsV0FBVztFQUNYLFlBQVk7QUFDZDtBQUNBO0VBQ0UsWUFBWTtBQUNkO0FBQ0E7RUFDRSxzQkFBc0I7QUFDeEI7QUFDQTtFQUNFLFlBQVk7QUFDZDtBQUNBO0VBQ0UsZUFBZTtFQUNmLHNCQUFzQjtFQUN0QixtQkFBbUI7RUFDbkIsY0FBYztFQUNkLGdCQUFnQjtFQUNoQix1QkFBdUI7RUFDdkIsaUJBQWlCO0VBQ2pCLG1CQUFtQjtBQUNyQjtBQUVBO0VBQ0Usa0JBQWtCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvc2hhcmVkL2Zvb3Rlci9mb290ZXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImZvb3RlciB7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjE0LCAyMjAsIDIyOCwgMjU1KTtcbiAgZm9udC1zaXplOiAxNHB4O1xuICBjb2xvcjogcmdiYSgwLDAsMCwwLjUpO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5mb290ZXIgLmNvbnRhaW5lciB7XG4gIHdpZHRoOiA5MHZ3O1xuICBtYXJnaW46IGF1dG87XG59XG5mb290ZXIgaDMge1xuICBjb2xvcjogYmxhY2s7XG59XG5mb290ZXIgLmJ1dHRvbiBhIHtcbiAgY29sb3I6IHJnYmEoMCwwLDAsMC41KTtcbn1cbmZvb3RlciAuYnV0dG9uOmhvdmVyIHtcbiAgb3BhY2l0eTogMC44O1xufVxuZm9vdGVyIC5wbGF5aW5nIHtcbiAgZm9udC1zaXplOiAxMnB4O1xuICBjb2xvcjogcmdiYSgwLDAsMCwwLjQpO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICBkaXNwbGF5OiBibG9jaztcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XG4gIG1hcmdpbi10b3A6IC0xNHB4O1xuICBtYXJnaW4tYm90dG9tOiAxNHB4O1xufVxuXG5mb290ZXIgLm9mZnNldCB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cbiJdfQ== */"
+module.exports = "footer {\n  background-color: rgba(214, 220, 228, 255);\n  font-size: 14px;\n  color: rgba(0,0,0,0.5);\n  text-align: center;\n}\nfooter video {\n  width: 100%;\n  height: auto;\n}\nfooter .container {\n  width: 90vw;\n  margin: auto;\n}\nfooter h3 {\n  color: black;\n}\nfooter .button a {\n  color: rgba(0,0,0,0.5);\n}\nfooter .button:hover {\n  opacity: 0.8;\n}\nfooter .playing {\n  font-size: 12px;\n  color: rgba(0,0,0,0.4);\n  white-space: nowrap;\n  display: block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin-top: -14px;\n  margin-bottom: 14px;\n}\nfooter .offset {\n  text-align: center;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL2Zvb3Rlci9mb290ZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDBDQUEwQztFQUMxQyxlQUFlO0VBQ2Ysc0JBQXNCO0VBQ3RCLGtCQUFrQjtBQUNwQjtBQUNBO0VBQ0UsV0FBVztFQUNYLFlBQVk7QUFDZDtBQUNBO0VBQ0UsV0FBVztFQUNYLFlBQVk7QUFDZDtBQUNBO0VBQ0UsWUFBWTtBQUNkO0FBQ0E7RUFDRSxzQkFBc0I7QUFDeEI7QUFDQTtFQUNFLFlBQVk7QUFDZDtBQUNBO0VBQ0UsZUFBZTtFQUNmLHNCQUFzQjtFQUN0QixtQkFBbUI7RUFDbkIsY0FBYztFQUNkLGdCQUFnQjtFQUNoQix1QkFBdUI7RUFDdkIsaUJBQWlCO0VBQ2pCLG1CQUFtQjtBQUNyQjtBQUVBO0VBQ0Usa0JBQWtCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvc2hhcmVkL2Zvb3Rlci9mb290ZXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImZvb3RlciB7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjE0LCAyMjAsIDIyOCwgMjU1KTtcbiAgZm9udC1zaXplOiAxNHB4O1xuICBjb2xvcjogcmdiYSgwLDAsMCwwLjUpO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5mb290ZXIgdmlkZW8ge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiBhdXRvO1xufVxuZm9vdGVyIC5jb250YWluZXIge1xuICB3aWR0aDogOTB2dztcbiAgbWFyZ2luOiBhdXRvO1xufVxuZm9vdGVyIGgzIHtcbiAgY29sb3I6IGJsYWNrO1xufVxuZm9vdGVyIC5idXR0b24gYSB7XG4gIGNvbG9yOiByZ2JhKDAsMCwwLDAuNSk7XG59XG5mb290ZXIgLmJ1dHRvbjpob3ZlciB7XG4gIG9wYWNpdHk6IDAuODtcbn1cbmZvb3RlciAucGxheWluZyB7XG4gIGZvbnQtc2l6ZTogMTJweDtcbiAgY29sb3I6IHJnYmEoMCwwLDAsMC40KTtcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgZGlzcGxheTogYmxvY2s7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xuICBtYXJnaW4tdG9wOiAtMTRweDtcbiAgbWFyZ2luLWJvdHRvbTogMTRweDtcbn1cblxuZm9vdGVyIC5vZmZzZXQge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -740,7 +740,7 @@ module.exports = "footer {\n  background-color: rgba(214, 220, 228, 255);\n  fon
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<footer>\n  <div class=\"container\">\n    <div class=\"ui-g\">\n      <div class=\"ui-g-3\">\n        <h3>License</h3>\n        GNU Affero General Public License v3.0<br>\n        Additional Questions? <a href=\"mailto:segler_alex@web.de\">Email Me</a>\n      </div>\n      <div class=\"ui-g-3\">\n        <h3>Audio Player</h3>\n        <div class=\"offset\" *ngIf=\"isPlayingStation\">\n          <p class=\"name\">{{station.name}}</p>\n          <ng-container *ngIf=\"stationType === 'VIDEO'\">\n            <video controls autoplay>\n              <source src=\"{{station.url}}\" type=\"application/x-mpegURL\">\n            </video>\n          </ng-container>\n          <ng-container *ngIf=\"stationType === 'AUDIO'\">\n            <marquee class=\"playing\" *ngIf=\"currentlyPlaying !== null\">{{currentlyPlaying}}</marquee>\n            <audio controls autoplay>\n              <source *ngIf=\"station.codec === 'mp3'\" src=\"{{station.url}}\" type=\"audio/{{station.codec}}\">\n              <source *ngIf=\"station.codec !== 'mp3'\" src=\"{{station.url}}\" type=\"audio/mp4\">\n              Your browser does not support the audio element.\n            </audio>\n          </ng-container>\n        </div>\n        <p *ngIf=\"!isPlayingStation\">No station playing</p>\n      </div>\n      <div class=\"ui-g-3\">\n        <h3>Bugtracker</h3>\n        <div style=\"display: inline-block\" class=\"button\">\n          <a target=\"_blank\" href=\"https://github.com/segler-alex/radiobrowser\">Webpage</a>\n        </div> &nbsp;\n        <div style=\"display: inline-block\" class=\"button\">\n          <a target=\"_blank\" href=\"https://github.com/segler-alex/radiobrowser-api\">API Server</a>\n        </div>\n      </div>\n      <div class=\"ui-g-3\">\n        <h3>Legal Note</h3>\n        <p>I'm not in any way responsible for the entries on this webpage, nor am I responsible for the radio stations themselves.</p>\n        <p>This is a community driven effort (like Wikipedia for example).</p>\n      </div>\n    </div>\n  </div>\n</footer>\n"
+module.exports = "<footer>\n  <div class=\"container\">\n    <div class=\"ui-g\">\n      <div class=\"ui-g-3\">\n        <h3>License</h3>\n        GNU Affero General Public License v3.0<br>\n        Additional Questions? <a href=\"mailto:segler_alex@web.de\">Email Me</a>\n      </div>\n      <div class=\"ui-g-3\">\n        <h3>{{stationType ? stationType : 'Audio'}} Player</h3>\n        <div class=\"offset\" *ngIf=\"isPlayingStation\">\n          <p class=\"name\">{{station.name}}</p>\n          <ng-container *ngIf=\"stationType === 'Video'\">\n            <video controls autoplay #video>\n              <source src=\"{{station.url}}\" type=\"application/x-mpegURL\">\n            </video>\n          </ng-container>\n          <ng-container *ngIf=\"stationType === 'Audio'\">\n            <marquee class=\"playing\" *ngIf=\"currentlyPlaying !== null\">{{currentlyPlaying}}</marquee>\n            <audio controls autoplay>\n              <source *ngIf=\"station.codec === 'mp3'\" src=\"{{station.url}}\" type=\"audio/{{station.codec}}\">\n              <source *ngIf=\"station.codec !== 'mp3'\" src=\"{{station.url}}\" type=\"audio/mp4\">\n              Your browser does not support the audio element.\n            </audio>\n          </ng-container>\n        </div>\n        <p *ngIf=\"!isPlayingStation\">No station playing</p>\n      </div>\n      <div class=\"ui-g-3\">\n        <h3>Bugtracker</h3>\n        <div style=\"display: inline-block\" class=\"button\">\n          <a target=\"_blank\" href=\"https://github.com/segler-alex/radiobrowser\">Webpage</a>\n        </div> &nbsp;\n        <div style=\"display: inline-block\" class=\"button\">\n          <a target=\"_blank\" href=\"https://github.com/segler-alex/radiobrowser-api\">API Server</a>\n        </div>\n      </div>\n      <div class=\"ui-g-3\">\n        <h3>Legal Note</h3>\n        <p>I'm not in any way responsible for the entries on this webpage, nor am I responsible for the radio stations themselves.</p>\n        <p>This is a community driven effort (like Wikipedia for example).</p>\n      </div>\n    </div>\n  </div>\n</footer>\n"
 
 /***/ }),
 
@@ -756,6 +756,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FooterComponent", function() { return FooterComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _station_player_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../station-player.service */ "./src/app/shared/station-player.service.ts");
+/* harmony import */ var hls_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! hls.js */ "./node_modules/hls.js/dist/hls.js");
+/* harmony import */ var hls_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(hls_js__WEBPACK_IMPORTED_MODULE_2__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -767,6 +769,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var FooterComponent = /** @class */ (function () {
     function FooterComponent(player) {
         var _this = this;
@@ -776,6 +779,9 @@ var FooterComponent = /** @class */ (function () {
         this.stationType = null;
         this.player.stationType.subscribe(function (res) {
             _this.stationType = res;
+            if (_this.stationType === 'Video') {
+                setTimeout(function () { _this.createHLS(); }, 3000);
+            }
         });
         this.player.stationCurrentlyPlaying.subscribe(function (res) {
             _this.currentlyPlaying = res;
@@ -789,6 +795,27 @@ var FooterComponent = /** @class */ (function () {
             }, 1000);
         });
     }
+    FooterComponent.prototype.createHLS = function () {
+        var _this = this;
+        if (hls_js__WEBPACK_IMPORTED_MODULE_2__["isSupported"]()) {
+            var video_1 = this.video.nativeElement;
+            var hls_1 = new hls_js__WEBPACK_IMPORTED_MODULE_2__();
+            // bind them together
+            hls_1.attachMedia(video_1);
+            hls_1.on(hls_js__WEBPACK_IMPORTED_MODULE_2__["Events"].MEDIA_ATTACHED, function () {
+                console.log('video and hls.js are now bound together !');
+                hls_1.loadSource(_this.station.url);
+                hls_1.on(hls_js__WEBPACK_IMPORTED_MODULE_2__["Events"].MANIFEST_PARSED, function (event, data) {
+                    console.log('manifest loaded, found ' + data.levels.length + ' quality level');
+                    video_1.play();
+                });
+            });
+        }
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('video'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], FooterComponent.prototype, "video", void 0);
     FooterComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-footer',
@@ -924,10 +951,10 @@ var StationPlayerService = /** @class */ (function () {
         this.isStationPlayingReplaySubject.next(this.isStationPlaying);
         this.stationReplaySubject.next(station);
         if (station.url.includes('m3u8')) {
-            this.stationType.next('VIDEO');
+            this.stationType.next('Video');
         }
         else {
-            this.stationType.next('AUDIO');
+            this.stationType.next('Audio');
             this.getMetadata(station.url);
         }
     };
