@@ -10,12 +10,19 @@
         <h3>Audio Player</h3>
         <div class="offset" *ngIf="isPlayingStation">
           <p class="name">{{station.name}}</p>
-          <marquee class="playing" *ngIf="currentlyPlaying !== null">{{currentlyPlaying}}</marquee>
-          <audio controls autoplay>
-            <source *ngIf="station.codec === 'mp3'" src="{{station.url}}" type="audio/{{station.codec}}">
-            <source *ngIf="station.codec !== 'mp3'" src="{{station.url}}" type="audio/mp4">
-            Your browser does not support the audio element.
-          </audio>
+          <ng-container *ngIf="stationType === 'VIDEO'">
+            <video controls autoplay>
+              <source src="{{station.url}}" type="application/x-mpegURL">
+            </video>
+          </ng-container>
+          <ng-container *ngIf="stationType === 'AUDIO'">
+            <marquee class="playing" *ngIf="currentlyPlaying !== null">{{currentlyPlaying}}</marquee>
+            <audio controls autoplay>
+              <source *ngIf="station.codec === 'mp3'" src="{{station.url}}" type="audio/{{station.codec}}">
+              <source *ngIf="station.codec !== 'mp3'" src="{{station.url}}" type="audio/mp4">
+              Your browser does not support the audio element.
+            </audio>
+          </ng-container>
         </div>
         <p *ngIf="!isPlayingStation">No station playing</p>
       </div>

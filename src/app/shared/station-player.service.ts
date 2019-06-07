@@ -13,13 +13,19 @@ export class StationPlayerService {
   public isStationPlayingReplaySubject: ReplaySubject<boolean> = new ReplaySubject(1);
   public stationReplaySubject: ReplaySubject<boolean> = new ReplaySubject(1);
   public stationCurrentlyPlaying: ReplaySubject<boolean> = new ReplaySubject(1);
+  public stationType: ReplaySubject<string> = new ReplaySubject(1);
 
   public playSong(station) {
     this.isStationPlaying = true;
     this.stationCurrentlyPlaying.next(null);
     this.isStationPlayingReplaySubject.next(this.isStationPlaying);
     this.stationReplaySubject.next(station);
-    this.getMetadata(station.url);
+    if (station.url.includes('m3u8')) {
+      this.stationType.next('VIDEO');
+    } else {
+      this.stationType.next('AUDIO');
+      this.getMetadata(station.url);
+    }
   }
 
   public getMetadata(url) {
