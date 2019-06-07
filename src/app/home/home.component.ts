@@ -60,7 +60,7 @@ export class HomeComponent {
       link: ['https://dreambox.de/board/index.php?thread/16645-e2-plugin-internetradio-mit-musik-visualisierung-und-webinterface/&postID=111994#post111994']
     },
     {
-      icon: 'https://lh3.googleusercontent.com/H2o1av-P8mgq3UGB5JgttKeaqaEadM2Fxh4nnro5r-TgJvW1DsM7ch43Zm6uzuToaOAi=s360-rw',
+      icon: 'https://lh3.googleusercontent.com/H2o1av-P8mgq3UGB5JgttKeaqaEadM2Fxh4nnro5r-TgJvW1DsM7ch43Zm6uzuToaOAi=s180-rw',
       name: 'Musicbox',
       description: 'Android Application',
       link: ['https://play.google.com/store/apps/details?id=com.humbergsoftware.musicbox.androidapp']
@@ -75,6 +75,7 @@ export class HomeComponent {
       icon: 'https://gitlab.gnome.org/uploads/-/system/project/avatar/5767/de.haeckerfelix.Gradio.png?width=64',
       name: 'Shortwave',
       description: 'Gradio Successor',
+      availability: ['fab fa-gitlab'],
       link: ['https://gitlab.gnome.org/World/Shortwave']
     },
     {
@@ -175,7 +176,7 @@ export class HomeComponent {
       ]
     },
     {
-      icon: 'https://lh3.googleusercontent.com/9ieIgFDwXMsnC3wqdqffIEsBtW8Y2ICrJyvJBuzuK3Y7ja6mp4bqbWTEPKi3lUkPCA=s360-rw',
+      icon: 'https://lh3.googleusercontent.com/9ieIgFDwXMsnC3wqdqffIEsBtW8Y2ICrJyvJBuzuK3Y7ja6mp4bqbWTEPKi3lUkPCA=s180-rw',
       name: 'RadioS2S',
       description: 'Radio app for android',
       availability: ['fas fa-download', 'fab fa-google-play', 'fab fa-github-square'],
@@ -192,11 +193,34 @@ export class HomeComponent {
       link: ['https://apps.nextcloud.com/apps/radio']
     },
     {
-      icon: 'https://lh3.googleusercontent.com/sT_xCxNoSoj7xtsPpAoVsA-wvA9pnpooBAl3hqzIlkTLyBET2T6IluTaXh2-berADw=s360-rw',
+      icon: 'https://lh3.googleusercontent.com/sT_xCxNoSoj7xtsPpAoVsA-wvA9pnpooBAl3hqzIlkTLyBET2T6IluTaXh2-berADw=s180-rw',
       name: 'Castro',
       description: 'Chromecast Radio',
       link: ['https://play.google.com/store/apps/details?id=guru.tall.castro']
     },
+    {
+      icon: 'https://lh3.googleusercontent.com/LNU3wSeIqCtYvvbcklHr4mAQbG4EAVZ_kamQZ_6ECmyYqudAX3FoZy42bIGnSj3pFE5n=s360-rw',
+      name: 'Radio FM Player',
+      description: 'TuneFM Plugin',
+      link: ['https://play.google.com/store/apps/details?id=fm.radio.sanity.radiofm']
+    },
+    {
+      icon: 'https://is4-ssl.mzstatic.com/image/thumb/Purple114/v4/b6/89/4a/b6894ace-512f-9279-1371-73cb755f205c/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-4.png/246x0w.jpg',
+      name: 'Instaradio',
+      availability: ['fas fa-download', 'fab fa-apple'],
+      description: 'iOS app',
+      link: ['https://www.soriko.no/instaradio/', 'https://itunes.apple.com/us/app/instaradio-radio-player/id538537206']
+    },
+    {
+      icon: 'https://docs.mopidy.com/favicon.ico',
+      name: 'RompR',
+      availability: ['fas fa-download', 'fab fa-github-square'],
+      description: 'Mopidy and MPD Web client',
+      link: ['https://fatg3erman.github.io/RompR/', 'https://github.com/fatg3erman/RompR']
+    }
+  ];
+
+  public libraries = [
     {
       icon: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/1200px-Java_programming_language_logo.svg.png',
       name: 'Radiobrowser4j',
@@ -204,10 +228,25 @@ export class HomeComponent {
       link: ['https://github.com/sfuhrm/radiobrowser4j']
     },
     {
-      icon: 'https://lh3.googleusercontent.com/LNU3wSeIqCtYvvbcklHr4mAQbG4EAVZ_kamQZ_6ECmyYqudAX3FoZy42bIGnSj3pFE5n=s360-rw',
-      name: 'Radio FM Player',
-      description: 'TuneFM Plugin',
-      link: ['https://play.google.com/store/apps/details?id=fm.radio.sanity.radiofm']
+      icon: 'https://img.icons8.com/color/420/npm.png',
+      name: 'radio-browser',
+      description: 'NodeJS module',
+      availability: ['fab fa-npm', 'fab fa-github-square'],
+      link: ['https://www.npmjs.com/package/radio-browser', 'https://github.com/nepodev/radio-browser']
+    },
+    {
+      icon: 'https://pypi.org/static/images/logo-small.6eef541e.svg',
+      name: 'PyRadios',
+      description: 'Python module',
+      availability: ['fab fa-python', 'fab fa-github-square'],
+      link: ['https://pypi.org/project/pyradios', 'https://github.com/andreztz/pyradios']
+    },
+    {
+      icon: 'https://s3-us-west-2.amazonaws.com/svgporn.com/logos/graphql.svg',
+      name: 'radio-gql',
+      description: 'GraphQL module',
+      availability: ['fab fa-github-square'],
+      link: ['https://github.com/ricardocasares/radio-gql']
     },
   ];
 

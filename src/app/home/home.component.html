@@ -59,7 +59,7 @@
 <div class="heading">
   <p>Get Involved</p>
   <h1>Available Projects</h1>
-  <p>If you know an app that is using this service which is not listed here, please drop me a note. </p>
+  <p>If you know an app that is using this service which is not listed here, please drop me a note.</p>
 </div>
 
 <div id="apps" class="ui-g">
@@ -85,6 +85,34 @@
   </div>
   <div class="ui-g-3">
     <p>... and this website!</p>
+  </div>
+</div>
+
+<div class="heading">
+  <h1>Available Libraries</h1>
+  <p>For the developers out there</p>
+</div>
+
+<div id="libs" class="ui-g">
+  <div class="ui-g-3 lib" *ngFor="let lib of libraries">
+    <div class="wrapper">
+      <div class="icon">
+        <img src="{{lib.icon}}">
+      </div>
+      <div class="border">
+        <p class="name">{{lib.name}}</p>
+        <p class="desc">{{lib.description}}</p>
+        <div *ngIf="lib.hasOwnProperty('availability') && lib.link !== undefined">
+          <span *ngFor="let availability of lib.availability; index as i">
+            <a *ngIf="availability !== 'fab fa-sourceforge'" target="_blank" href="{{lib.link[i]}}"><i class="{{availability}}"></i></a>
+            <a *ngIf="availability === 'fab fa-sourceforge'" target="_blank" href="{{lib.link[i]}}">sf</a>
+          </span>
+        </div>
+        <div *ngIf="!lib.hasOwnProperty('availability') && lib.link !== undefined">
+          <a href="{{lib.link[0]}}" target="_blank"><i class="fas fa-download"></i></a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
