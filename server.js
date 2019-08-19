@@ -33,4 +33,4 @@ process.on('uncaughtException', function (err) {
 
 app.listen(port, () => console.log(`Community Radio Browser frontend listening on port ${port}!`));
 
-app.use( express.static(__dirname + '/dist/radiobrowser' ) );
+app.use( express.static(__dirname + '/docs' ) );
