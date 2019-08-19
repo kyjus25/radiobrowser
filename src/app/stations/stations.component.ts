@@ -226,16 +226,16 @@ export class StationsComponent {
       const this1 = this;
       clearInterval(this.interval);
       this.tableData.forEach(data => {
-        this.http.get('http://173.17.33.25:4200/icy?url=' + data.url).pipe( takeUntil(this.icyUnsubscribe) ).subscribe(icy => {
-          if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+        this.http.get('http://173.17.33.25/icy.php?url=' + data.url).pipe( takeUntil(this.icyUnsubscribe) ).subscribe(icy => {
+          if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
             data.playing = icy['icy-title'];
           }
         });
       });
       this.interval = setInterval(function() {
         this1.tableData.forEach(data => {
-          this1.http.get('http://173.17.33.25:4200/icy?url=' + data.url).pipe( takeUntil(this1.icyUnsubscribe) ).subscribe(icy => {
-            if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+          this1.http.get('http://173.17.33.25/icy.php?url=' + data.url).pipe( takeUntil(this1.icyUnsubscribe) ).subscribe(icy => {
+            if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
               data.playing = icy['icy-title'];
             }
           });

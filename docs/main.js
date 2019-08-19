@@ -1005,8 +1005,8 @@ var StationPlayerService = /** @class */ (function () {
     StationPlayerService.prototype.getMetadata = function (url) {
         var this1 = this;
         clearInterval(this.interval);
-        this1.http.get('http://173.17.33.25:4200/icy?url=' + url).subscribe(function (icy) {
-            if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+        this1.http.get('http://173.17.33.25/icy.php?url=' + url).subscribe(function (icy) {
+            if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
                 this1.stationCurrentlyPlaying.next(icy['icy-title']);
             }
             else {
@@ -1014,8 +1014,8 @@ var StationPlayerService = /** @class */ (function () {
             }
         });
         this.interval = setInterval(function () {
-            this1.http.get('http://173.17.33.25:4200/icy?url=' + url).subscribe(function (icy) {
-                if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+            this1.http.get('http://173.17.33.25/icy.php?url=' + url).subscribe(function (icy) {
+                if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
                     this1.stationCurrentlyPlaying.next(icy['icy-title']);
                 }
                 else {
@@ -1381,16 +1381,16 @@ var StationsComponent = /** @class */ (function () {
             var this1 = _this;
             clearInterval(_this.interval);
             _this.tableData.forEach(function (data) {
-                _this.http.get('http://173.17.33.25:4200/icy?url=' + data.url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(_this.icyUnsubscribe)).subscribe(function (icy) {
-                    if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+                _this.http.get('http://173.17.33.25/icy.php?url=' + data.url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(_this.icyUnsubscribe)).subscribe(function (icy) {
+                    if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
                         data.playing = icy['icy-title'];
                     }
                 });
             });
             _this.interval = setInterval(function () {
                 this1.tableData.forEach(function (data) {
-                    this1.http.get('http://173.17.33.25:4200/icy?url=' + data.url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(this1.icyUnsubscribe)).subscribe(function (icy) {
-                        if (icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+                    this1.http.get('http://173.17.33.25/icy.php?url=' + data.url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(this1.icyUnsubscribe)).subscribe(function (icy) {
+                        if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
                             data.playing = icy['icy-title'];
                         }
                     });
