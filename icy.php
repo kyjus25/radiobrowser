@@ -1,4 +1,5 @@
 <?php
+    header("Access-Control-Allow-Origin: *");
     $stream = getMp3StreamTitle($argv[1]);
     echo $stream;
 
