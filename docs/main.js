@@ -661,12 +661,14 @@ var NewStationComponent = /** @class */ (function () {
         if (this.name !== '' && this.name !== undefined &&
             this.url !== '' && this.url !== undefined) {
             var countryName = null;
+            var countryCode = null;
             var stateName = null;
             var languageName = null;
             var tagsCommaSeperated = null;
             if (this.country !== undefined) {
                 var country = this.country;
                 countryName = country.name;
+                countryCode = country['alpha2Code'];
             }
             if (this.state !== undefined) {
                 var state = this.state;
@@ -693,7 +695,8 @@ var NewStationComponent = /** @class */ (function () {
                 tags: tagsCommaSeperated,
                 language: languageName,
                 state: stateName,
-                country: countryName
+                country: countryName,
+                countryCode: countryCode
             };
             console.log(submission);
             this.http.post('https://www.radio-browser.info/webservice/json/add', submission).subscribe(function (res) {
@@ -706,6 +709,7 @@ var NewStationComponent = /** @class */ (function () {
                 _this.language = '';
                 _this.state = '';
                 _this.country = '';
+                _this.countryCode = null;
                 console.log(res);
             });
         }

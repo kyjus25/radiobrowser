@@ -56,6 +56,7 @@ export class NewStationComponent {
     ) {
 
       let countryName = null;
+      let countryCode = null;
       let stateName = null;
       let languageName = null;
       let tagsCommaSeperated = null;
@@ -63,6 +64,7 @@ export class NewStationComponent {
       if (this.country !== undefined) {
         const country: any = this.country;
         countryName = country.name;
+        countryCode = country['alpha2Code'];
       }
 
       if (this.state !== undefined) {
@@ -95,7 +97,8 @@ export class NewStationComponent {
         tags: tagsCommaSeperated,
         language: languageName,
         state: stateName,
-        country: countryName
+        country: countryName,
+        countryCode: countryCode
       };
       console.log(submission);
       this.http.post('https://www.radio-browser.info/webservice/json/add', submission).subscribe(res => {
@@ -108,6 +111,7 @@ export class NewStationComponent {
         this.language = '';
         this.state = '';
         this.country = '';
+        this.countryCode = null;
         console.log(res);
       });
     }
