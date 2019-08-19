@@ -12,6 +12,7 @@ export class NewStationComponent {
 
   public countries;
   public filteredCountries;
+  public countryCode;
 
   public states;
   public filteredStates;
@@ -36,7 +37,7 @@ export class NewStationComponent {
     private http: HttpClient
   ) {
     combineLatest([
-      this.http.get('https://www.radio-browser.info/webservice/json/countries'),
+      this.http.get('https://restcountries.eu/rest/v2/all'),
       this.http.get('https://www.radio-browser.info/webservice/json/states'),
       this.http.get('https://www.radio-browser.info/webservice/json/languages'),
       this.http.get('https://www.radio-browser.info/webservice/json/tags')
@@ -126,6 +127,10 @@ export class NewStationComponent {
 
   searchTags(event) {
     this.filteredTags = this.allTags.filter(tag => tag.name.toLowerCase().includes(event.query.toLowerCase()));
+  }
+
+  public setCountryCode() {
+    this.countryCode = this.country ? this.country['alpha2Code'] : null;
   }
 
   public hasContent(element) {

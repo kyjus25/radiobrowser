@@ -47,12 +47,21 @@
       field="name"
       [forceSelection]="true"
       [suggestions]="filteredCountries"
+      (onSelect)="setCountryCode()"
+      (onClear)="setCountryCode()"
+      (onUnselect)="setCountryCode()"
+      (onBlur)="setCountryCode()"
       (completeMethod)="searchCountries($event)"
     ></p-autoComplete>
     <label for="float-input5">Country</label>
   </span>
 
+  <br><br>
 
+  <span class="ui-float-label">
+    <input disabled [(ngModel)]="countryCode" id="float-input10" type="text" size="80" pInputText>
+    <label for="float-input9">Country Code</label>
+  </span>
 
 
   <br><br>

@@ -213,11 +213,9 @@ export class StationsComponent {
       order: orderBy,
       reverse: false
     };
-    console.log(searchParams);
     this.http.post(
       'https://www.radio-browser.info/webservice/json/stations/search', searchParams
     ).subscribe(res => {
-      console.log(res);
       this.tableData = <any[]>res;
       this.tableData.map(data => data.votes = parseInt(data.votes, 10));
       this.icyUnsubscribe.next();
