@@ -1408,8 +1408,14 @@ var StationsComponent = /** @class */ (function () {
             reverse: false
         };
         this.http.post('https://www.radio-browser.info/webservice/json/stations/search', searchParams).subscribe(function (res) {
-            _this.tableData = res;
-            _this.tableData.map(function (data) { return data.votes = parseInt(data.votes, 10); });
+            var tableData = res;
+            tableData.forEach(function (data) {
+                data.url = data.url.replace('http://', 'https://');
+                data.favicon = data.favicon.replace('http://', 'https://');
+                data.votes = parseInt(data.votes, 10);
+            });
+            _this.tableData = tableData;
+            console.log(_this.tableData);
             _this.icyUnsubscribe.next();
             _this.icyUnsubscribe.complete();
             var this1 = _this;

@@ -216,8 +216,14 @@ export class StationsComponent {
     this.http.post(
       'https://www.radio-browser.info/webservice/json/stations/search', searchParams
     ).subscribe(res => {
-      this.tableData = <any[]>res;
-      this.tableData.map(data => data.votes = parseInt(data.votes, 10));
+      const tableData = <any[]>res;
+      tableData.forEach(data => {
+        data.url = data.url.replace('http://', 'https://');
+        data.favicon = data.favicon.replace('http://', 'https://');
+        data.votes = parseInt(data.votes, 10);
+      });
+      this.tableData = tableData;
+      console.log(this.tableData);
       this.icyUnsubscribe.next();
       this.icyUnsubscribe.complete();
 
