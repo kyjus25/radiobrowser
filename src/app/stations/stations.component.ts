@@ -132,10 +132,10 @@ export class StationsComponent {
 
     combineLatest([
       this.route.queryParams,
-      this.http.get('http://www.radio-browser.info/webservice/json/countries'),
-      this.http.get('http://www.radio-browser.info/webservice/json/states'),
-      this.http.get('http://www.radio-browser.info/webservice/json/languages'),
-      this.http.get('http://www.radio-browser.info/webservice/json/tags')
+      this.http.get('https://www.radio-browser.info/webservice/json/countries'),
+      this.http.get('https://www.radio-browser.info/webservice/json/states'),
+      this.http.get('https://www.radio-browser.info/webservice/json/languages'),
+      this.http.get('https://www.radio-browser.info/webservice/json/tags')
     ]).subscribe(([queryParams, countries, states, languages, tags]) => {
 
       if (queryParams.hasOwnProperty('search') && queryParams.search.length > 0) {
@@ -215,7 +215,7 @@ export class StationsComponent {
     };
     console.log(searchParams);
     this.http.post(
-      'http://www.radio-browser.info/webservice/json/stations/search', searchParams
+      'https://www.radio-browser.info/webservice/json/stations/search', searchParams
     ).subscribe(res => {
       console.log(res);
       this.tableData = <any[]>res;
@@ -226,7 +226,7 @@ export class StationsComponent {
       const this1 = this;
       clearInterval(this.interval);
       this.tableData.forEach(data => {
-        this.http.get('http://173.17.33.25/icy.php?url=' + data.url).pipe( takeUntil(this.icyUnsubscribe) ).subscribe(icy => {
+        this.http.get('https://173.17.33.25/icy.php?url=' + data.url).pipe( takeUntil(this.icyUnsubscribe) ).subscribe(icy => {
           if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
             data.playing = icy['icy-title'];
           }
@@ -234,7 +234,7 @@ export class StationsComponent {
       });
       this.interval = setInterval(function() {
         this1.tableData.forEach(data => {
-          this1.http.get('http://173.17.33.25/icy.php?url=' + data.url).pipe( takeUntil(this1.icyUnsubscribe) ).subscribe(icy => {
+          this1.http.get('https://173.17.33.25/icy.php?url=' + data.url).pipe( takeUntil(this1.icyUnsubscribe) ).subscribe(icy => {
             if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
               data.playing = icy['icy-title'];
             }
@@ -251,7 +251,7 @@ export class StationsComponent {
       this.disableOtherSorting('Broken');
       this.wipeSearches();
       this.http.get(
-        'http://www.radio-browser.info/webservice/json/stations/broken'
+        'https://www.radio-browser.info/webservice/json/stations/broken'
       ).subscribe(res => {
         this.tableData = <any[]>res;
         this.tableData.map(data => data.votes = parseInt(data.votes, 10));
@@ -266,7 +266,7 @@ export class StationsComponent {
       this.disableOtherSorting('Improvable');
       this.wipeSearches();
       this.http.get(
-        'http://www.radio-browser.info/webservice/json/stations/improvable'
+        'https://www.radio-browser.info/webservice/json/stations/improvable'
       ).subscribe(res => {
         this.tableData = <any[]>res;
         this.tableData.map(data => data.votes = parseInt(data.votes, 10));
@@ -306,7 +306,7 @@ export class StationsComponent {
   }
 
   public voteStation(station) {
-    this.http.get('http://www.radio-browser.info/webservice/json/vote/' + station.id).subscribe(res => {
+    this.http.get('https://www.radio-browser.info/webservice/json/vote/' + station.id).subscribe(res => {
       this.messageService.add({severity: 'success', summary: 'Vote Added', detail: 'Thanks for voting for ' + station.name});
     });
   }

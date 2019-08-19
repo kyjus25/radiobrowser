@@ -16,7 +16,6 @@ export class HomeComponent {
     stations: 'Loading...',
     tags: 'Loading...'
   };
-  public searchResults = [];
   public applications = [
     {
       icon: 'https://gitlab.gnome.org/GNOME/rhythmbox/raw/master/data/icons/hicolor/256x256/apps/rhythmbox.png',
@@ -37,10 +36,10 @@ export class HomeComponent {
       link: ['https://odio.io/']
     },
     {
-      icon: 'http://milki.include-once.org/streamtuner2/logo.png',
+      icon: 'https://milki.include-once.org/streamtuner2/logo.png',
       name: 'StreamTuner2',
       description: 'Contributed Plugin',
-      link: ['http://milki.include-once.org/streamtuner2/']
+      link: ['https://milki.include-once.org/streamtuner2/']
     },
     {
       icon: 'https://lh3.googleusercontent.com/ec5UdKD2rQi9j1Wc09B1-yTzeh2bb8eMXcRtI6NW7JDnciuoHa8FLRRahdPFsqOcLqM=s360-rw',
@@ -170,7 +169,7 @@ export class HomeComponent {
       description: 'Android app for visually impaired',
       availability: ['fas fa-download', 'fab fa-google-play', 'fab fa-github-square'],
       link: [
-        'http://www.indr.ch/projects/',
+        'https://www.indr.ch/3-3-5/',
         'https://play.google.com/store/apps/details?id=ch.indr.threethreefive',
         'https://github.com/indr/335'
       ]
@@ -205,18 +204,50 @@ export class HomeComponent {
       link: ['https://play.google.com/store/apps/details?id=fm.radio.sanity.radiofm']
     },
     {
-      icon: 'https://is4-ssl.mzstatic.com/image/thumb/Purple114/v4/b6/89/4a/b6894ace-512f-9279-1371-73cb755f205c/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-4.png/246x0w.jpg',
-      name: 'Instaradio',
-      availability: ['fas fa-download', 'fab fa-apple'],
-      description: 'iOS app',
-      link: ['https://www.soriko.no/instaradio/', 'https://itunes.apple.com/us/app/instaradio-radio-player/id538537206']
-    },
-    {
       icon: 'https://docs.mopidy.com/favicon.ico',
       name: 'RompR',
       availability: ['fas fa-download', 'fab fa-github-square'],
       description: 'Mopidy and MPD Web client',
       link: ['https://fatg3erman.github.io/RompR/', 'https://github.com/fatg3erman/RompR']
+    },
+    {
+      icon: 'https://lh3.googleusercontent.com/J65hAqx1WUxTw4tNdsh7r9i8S9aDc82Kp_5_f4KiE2QlOuS_XBprzU38EUwzuC1xlg=s180-rw',
+      name: 'Open Radio',
+      availability: ['fas fa-download', 'fab fa-github-square'],
+      description: 'App with Android auto support',
+      link: ['https://play.google.com/store/apps/details?id=com.yuriy.openradio', 'https://bitbucket.org/ChernyshovYuriy/openradio']
+    },
+
+    {
+      icon: 'https://avatars1.githubusercontent.com/u/891620?s=460&v=4',
+      name: 'YCast',
+      availability: ['fab fa-github-square'],
+      description: 'Yamaha or Onkyo HiFi Receiver',
+      link: ['https://github.com/milaq/YCast']
+    },
+    {
+      icon: 'https://github.com/cwahlmann/radiopi/blob/master/RadioPi/gfx/icon.png?raw=true',
+      name: 'RadioPi',
+      availability: ['fab fa-github-square'],
+      description: 'Raspberry Pi radio player',
+      link: ['https://github.com/cwahlmann/radiopi']
+    }
+  ];
+
+  public closedSourceApps = [
+    {
+      icon: 'https://www.soriko.no/wp-content/uploads/2014/09/instaradio-ios.png',
+      name: 'InstaRadio',
+      availability: ['fab fa-apple', 'fas fa-code'],
+      description: 'iOS App',
+      link: ['https://apps.apple.com/us/app/instaradio-radio-player/id538537206', 'https://www.soriko.no/instaradio/']
+    },
+    {
+      icon: 'https://petralex.pro/images/logo_petralex.png',
+      name: 'Radio Volume Booster',
+      availability: ['fab fa-apple', 'fas fa-code'],
+      description: 'iOS App',
+      link: ['https://apps.apple.com/us/app/id887768699', 'https://petralex.pro/de/apps/radio']
     }
   ];
 
@@ -263,7 +294,7 @@ export class HomeComponent {
   }
   private getServerStats() {
       this.http.get(
-        'http://www.radio-browser.info/webservice/json/stats'
+        'https://www.radio-browser.info/webservice/json/stats'
       ).subscribe(res => {
         this.stats = <any>res;
       });

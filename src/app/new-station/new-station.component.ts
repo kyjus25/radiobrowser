@@ -36,10 +36,10 @@ export class NewStationComponent {
     private http: HttpClient
   ) {
     combineLatest([
-      this.http.get('http://www.radio-browser.info/webservice/json/countries'),
-      this.http.get('http://www.radio-browser.info/webservice/json/states'),
-      this.http.get('http://www.radio-browser.info/webservice/json/languages'),
-      this.http.get('http://www.radio-browser.info/webservice/json/tags')
+      this.http.get('https://www.radio-browser.info/webservice/json/countries'),
+      this.http.get('https://www.radio-browser.info/webservice/json/states'),
+      this.http.get('https://www.radio-browser.info/webservice/json/languages'),
+      this.http.get('https://www.radio-browser.info/webservice/json/tags')
     ]).subscribe(([countries, states, languages, tags]) => {
       this.countries = countries;
       this.states = states;
@@ -97,7 +97,7 @@ export class NewStationComponent {
         country: countryName
       };
       console.log(submission);
-      this.http.post('http://www.radio-browser.info/webservice/json/add', submission).subscribe(res => {
+      this.http.post('https://www.radio-browser.info/webservice/json/add', submission).subscribe(res => {
         this.name = '';
         this.url = '';
         this.homepage = '';

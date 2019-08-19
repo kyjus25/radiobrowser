@@ -26,9 +26,9 @@
 
   <div *ngIf="searchName && (tableData && !noResults)">
     <p>Save current list as playlist for your audio player:
-      <a target="_blank" href="http://www.radio-browser.info/webservice/pls/stations/search?name={{searchName}}&limit=100">PLS</a>,
-      <a target="_blank" href="http://www.radio-browser.info/webservice/m3u/stations/search?name={{searchName}}&limit=100">M3U</a>,
-      <a target="_blank" href="http://www.radio-browser.info/webservice/xspf/stations/search?name={{searchName}}&limit=100">XSPF</a>
+      <a target="_blank" href="https://www.radio-browser.info/webservice/pls/stations/search?name={{searchName}}&limit=100">PLS</a>,
+      <a target="_blank" href="https://www.radio-browser.info/webservice/m3u/stations/search?name={{searchName}}&limit=100">M3U</a>,
+      <a target="_blank" href="https://www.radio-browser.info/webservice/xspf/stations/search?name={{searchName}}&limit=100">XSPF</a>
     </p>
   </div>
 
@@ -237,7 +237,7 @@
         </ng-container>
         <td class="actions">
           <i (click)="playStation(station)" class="fas fa-play-circle"></i>
-          <a target="_blank" href="http://www.radio-browser.info/webservice/pls/url/{{station.id}}">
+          <a target="_blank" href="https://www.radio-browser.info/webservice/pls/url/{{station.id}}">
             <i class="fas fa-save"></i>
           </a>
           <a target="_blank" href="{{station.homepage}}"><i class="fas fa-home"></i></a>

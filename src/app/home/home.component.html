@@ -89,6 +89,33 @@
 </div>
 
 <div class="heading">
+  <h1>Closed Source Users</h1>
+</div>
+
+<div id="closed" class="ui-g">
+  <div class="ui-g-3 closedItem" *ngFor="let closedItem of closedSourceApps">
+    <div class="wrapper">
+      <div class="icon">
+        <img src="{{closedItem.icon}}">
+      </div>
+      <div class="border">
+        <p class="name">{{closedItem.name}}</p>
+        <p class="desc">{{closedItem.description}}</p>
+        <div *ngIf="closedItem.hasOwnProperty('availability') && closedItem.link !== undefined">
+          <span *ngFor="let availability of closedItem.availability; index as i">
+            <a *ngIf="availability !== 'fab fa-sourceforge'" target="_blank" href="{{closedItem.link[i]}}"><i class="{{availability}}"></i></a>
+            <a *ngIf="availability === 'fab fa-sourceforge'" target="_blank" href="{{closedItem.link[i]}}">sf</a>
+          </span>
+        </div>
+        <div *ngIf="!closedItem.hasOwnProperty('availability') && closedItem.link !== undefined">
+          <a href="{{closedItem.link[0]}}" target="_blank"><i class="fas fa-download"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="heading">
   <h1>Available Libraries</h1>
   <p>For the developers out there</p>
 </div>

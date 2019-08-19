@@ -99,11 +99,11 @@
   max-width: 1000px;
   margin: auto;
 }
-#apps, #libs {
+#apps, #libs, #closed {
   max-width: 1000px;
   margin: auto;
 }
-#apps a, #libs a {
+#apps a, #libs a, #closed a {
   background-color: black;
   color: white;
   border-radius: 100%;
@@ -113,23 +113,23 @@
   height: 30px;
   margin: 10px 5px;
 }
-.app .wrapper, .lib .wrapper {
+.app .wrapper, .lib .wrapper, .closedItem .wrapper {
   text-align: center;
   margin: 10px;
 }
-.app .border, .lib .border {
+.app .border, .lib .border, .closedItem .border {
   border: 1px solid black;
   border-top: none;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-.app p, .lib p {
+.app p, .lib p, .closedItem p {
   margin: 0;
 }
-.app .name, .lib .name {
+.app .name, .lib .name, .closedItem .name {
   padding: 10px 0;
 }
-.app .desc, .lib .desc {
+.app .desc, .lib .desc, .closedItem .desc {
   font-size: 12px;
   font-weight: 100;
 }

@@ -23,7 +23,7 @@ export class StationHistoryComponent {
       if (stationuuid === undefined) {
         history.go(-1);
       } else {
-        this.http.get('http://www.radio-browser.info/webservice/json/stations/changed/' + stationuuid).subscribe(history => {
+        this.http.get('https://www.radio-browser.info/webservice/json/stations/changed/' + stationuuid).subscribe(history => {
           const historyArray = <any[]>history;
           if (historyArray.length === 0) {
             this.loading = false;
