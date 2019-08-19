@@ -1,9 +1,19 @@
 <?php
     header("Access-Control-Allow-Origin: *");
-    $stream = getMp3StreamTitle($argv[1]);
-    echo $stream;
+    $stream = getMp3StreamTitle();
 
-    function getMp3StreamTitle($steam_url)
+    if (strlen($stream) > 0) {
+
+    if ($stream[0] != "{") {
+	echo '{"icy-title": "' . $stream . '"}';
+    } else {
+        echo $stream;
+    }
+    } else {
+       echo "{}";
+    }
+
+    function getMp3StreamTitle()
     {
         $result = false;
         $icy_metaint = -1;
@@ -20,7 +30,7 @@
 
         $default = stream_context_set_default($opts);
 
-        $stream = fopen($steam_url, 'r');
+        $stream = fopen($_GET['url'], 'r');
 
         if($stream && ($meta_data = stream_get_meta_data($stream)) && isset($meta_data['wrapper_data'])){
             foreach ($meta_data['wrapper_data'] as $header){
