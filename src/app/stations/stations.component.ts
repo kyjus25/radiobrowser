@@ -267,7 +267,10 @@ export class StationsComponent {
       this.player.stationCurrentlyPlaying
     ]).subscribe(([station, playing]) => {
       if (this.tableData && playing) {
-        this.tableData.find(data => data['id'] === station['id']).playing = playing;
+        const foundRow = this.tableData.find(data => data['id'] === station['id']);
+        if (foundRow) {
+          foundRow.playing = playing;
+        }
       }
     });
   }

@@ -1455,7 +1455,10 @@ var StationsComponent = /** @class */ (function () {
         ]).subscribe(function (_a) {
             var station = _a[0], playing = _a[1];
             if (_this.tableData && playing) {
-                _this.tableData.find(function (data) { return data['id'] === station['id']; }).playing = playing;
+                var foundRow = _this.tableData.find(function (data) { return data['id'] === station['id']; });
+                if (foundRow) {
+                    foundRow.playing = playing;
+                }
             }
         });
     };
