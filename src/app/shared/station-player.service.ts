@@ -31,7 +31,7 @@ export class StationPlayerService {
   public getMetadata(url) {
     const this1 = this;
     clearInterval(this.interval);
-    this1.http.get('http://icy.radio-browser.live/icy.php?url=' + url).subscribe(icy => {
+    this1.http.get('https://icy.radio-browser.live/icy.php?url=' + url).subscribe(icy => {
       if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
         this1.stationCurrentlyPlaying.next( icy['icy-title'] );
       } else {
@@ -39,7 +39,7 @@ export class StationPlayerService {
       }
     });
     this.interval = setInterval(function() {
-      this1.http.get('http://icy.radio-browser.live/icy.php?url=' + url).subscribe(icy => {
+      this1.http.get('https://icy.radio-browser.live/icy.php?url=' + url).subscribe(icy => {
         if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
           this1.stationCurrentlyPlaying.next( icy['icy-title'] );
         } else {

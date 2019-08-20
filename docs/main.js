@@ -1041,7 +1041,7 @@ var StationPlayerService = /** @class */ (function () {
     StationPlayerService.prototype.getMetadata = function (url) {
         var this1 = this;
         clearInterval(this.interval);
-        this1.http.get('http://icy.radio-browser.live/icy.php?url=' + url).subscribe(function (icy) {
+        this1.http.get('https://icy.radio-browser.live/icy.php?url=' + url).subscribe(function (icy) {
             if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
                 this1.stationCurrentlyPlaying.next(icy['icy-title']);
             }
@@ -1050,7 +1050,7 @@ var StationPlayerService = /** @class */ (function () {
             }
         });
         this.interval = setInterval(function () {
-            this1.http.get('http://icy.radio-browser.live/icy.php?url=' + url).subscribe(function (icy) {
+            this1.http.get('https://icy.radio-browser.live/icy.php?url=' + url).subscribe(function (icy) {
                 if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
                     this1.stationCurrentlyPlaying.next(icy['icy-title']);
                 }
@@ -1421,7 +1421,7 @@ var StationsComponent = /** @class */ (function () {
             var this1 = _this;
             clearInterval(_this.interval);
             _this.tableData.forEach(function (data) {
-                _this.http.get('http://icy.radio-browser.live/icy.php?url=' + data.url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(_this.icyUnsubscribe)).subscribe(function (icy) {
+                _this.http.get('https://icy.radio-browser.live/icy.php?url=' + data.url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(_this.icyUnsubscribe)).subscribe(function (icy) {
                     if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
                         data.playing = icy['icy-title'];
                     }
@@ -1429,7 +1429,7 @@ var StationsComponent = /** @class */ (function () {
             });
             _this.interval = setInterval(function () {
                 this1.tableData.forEach(function (data) {
-                    this1.http.get('http://icy.radio-browser.live/icy.php?url=' + data.url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(this1.icyUnsubscribe)).subscribe(function (icy) {
+                    this1.http.get('https://icy.radio-browser.live/icy.php?url=' + data.url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(this1.icyUnsubscribe)).subscribe(function (icy) {
                         if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
                             data.playing = icy['icy-title'];
                         }
@@ -1591,7 +1591,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/kyjus25/Documents/testing/radiobrowser/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/kyjus25/Documents/testing/radiobrowser/src/main.ts */"./src/main.ts");
 
 
 /***/ })
