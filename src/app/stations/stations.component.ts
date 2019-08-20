@@ -130,7 +130,7 @@ export class StationsComponent {
     private player: StationPlayerService
   ) {
 
-    console.log('Changes working');
+    this.listenStationPlayingChanges();
 
     combineLatest([
       this.route.queryParams,
@@ -261,6 +261,17 @@ export class StationsComponent {
     }
   }
 
+  public listenStationPlayingChanges() {
+    combineLatest([
+      this.player.stationReplaySubject,
+      this.player.stationCurrentlyPlaying
+    ]).subscribe(([station, playing]) => {
+      if (this.tableData && playing) {
+        this.tableData.find(data => data['id'] === station['id']).playing = playing;
+      }
+    });
+  }
+
 
   public wipeSearches() {
     this.searchName = '';
@@ -318,7 +329,6 @@ export class StationsComponent {
   }
 
   public pageChange(event) {
-    console.log(event);
 
     this.icyUnsubscribe.next();
     this.icyUnsubscribe.complete();
@@ -331,9 +341,7 @@ export class StationsComponent {
   }
 
   private getIcy(event) {
-    console.log('GETTING ICY', event.first, event.rows);
     for (let i = 0; i < event.rows; i++) {
-      console.log(i, this.tableData[event.first + i]);
       if (this.tableData[event.first + i]) {
         this.http.get('https://icy.radio-browser.live/icy.php?url=' + this.tableData[event.first + i].url)
           .pipe( takeUntil(this.icyUnsubscribe) )

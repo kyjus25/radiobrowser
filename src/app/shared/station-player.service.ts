@@ -12,7 +12,7 @@ export class StationPlayerService {
   private isStationPlaying = false;
   public isStationPlayingReplaySubject: ReplaySubject<boolean> = new ReplaySubject(1);
   public stationReplaySubject: ReplaySubject<boolean> = new ReplaySubject(1);
-  public stationCurrentlyPlaying: ReplaySubject<boolean> = new ReplaySubject(1);
+  public stationCurrentlyPlaying: ReplaySubject<string> = new ReplaySubject(1);
   public stationType: ReplaySubject<string> = new ReplaySubject(1);
 
   public playSong(station) {

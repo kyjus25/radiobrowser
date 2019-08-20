@@ -1326,7 +1326,7 @@ var StationsComponent = /** @class */ (function () {
                 width: '170'
             }
         ];
-        console.log('Changes working');
+        this.listenStationPlayingChanges();
         Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])([
             this.route.queryParams,
             this.http.get('https://www.radio-browser.info/webservice/json/countries'),
@@ -1447,6 +1447,18 @@ var StationsComponent = /** @class */ (function () {
             });
         }
     };
+    StationsComponent.prototype.listenStationPlayingChanges = function () {
+        var _this = this;
+        Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["combineLatest"])([
+            this.player.stationReplaySubject,
+            this.player.stationCurrentlyPlaying
+        ]).subscribe(function (_a) {
+            var station = _a[0], playing = _a[1];
+            if (_this.tableData && playing) {
+                _this.tableData.find(function (data) { return data['id'] === station['id']; }).playing = playing;
+            }
+        });
+    };
     StationsComponent.prototype.wipeSearches = function () {
         this.searchName = '';
         this.searchCountry = '';
@@ -1495,7 +1507,6 @@ var StationsComponent = /** @class */ (function () {
     };
     StationsComponent.prototype.pageChange = function (event) {
         var _this = this;
-        console.log(event);
         this.icyUnsubscribe.next();
         this.icyUnsubscribe.complete();
         clearInterval(this.interval);
@@ -1506,9 +1517,7 @@ var StationsComponent = /** @class */ (function () {
     };
     StationsComponent.prototype.getIcy = function (event) {
         var _this = this;
-        console.log('GETTING ICY', event.first, event.rows);
         var _loop_1 = function (i) {
-            console.log(i, this_1.tableData[event.first + i]);
             if (this_1.tableData[event.first + i]) {
                 this_1.http.get('https://icy.radio-browser.live/icy.php?url=' + this_1.tableData[event.first + i].url)
                     .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(this_1.icyUnsubscribe))
