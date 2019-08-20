@@ -680,10 +680,10 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kyjus25/Documents/testing/radiobrowser/src/styles.css */"./src/styles.css");
-__webpack_require__(/*! /Users/kyjus25/Documents/testing/radiobrowser/node_modules/primeicons/primeicons.css */"./node_modules/primeicons/primeicons.css");
-__webpack_require__(/*! /Users/kyjus25/Documents/testing/radiobrowser/node_modules/primeng/resources/themes/nova-light/theme.css */"./node_modules/primeng/resources/themes/nova-light/theme.css");
-module.exports = __webpack_require__(/*! /Users/kyjus25/Documents/testing/radiobrowser/node_modules/primeng/resources/primeng.min.css */"./node_modules/primeng/resources/primeng.min.css");
+__webpack_require__(/*! /home/kyjus25/Documents/testing/radiobrowser/src/styles.css */"./src/styles.css");
+__webpack_require__(/*! /home/kyjus25/Documents/testing/radiobrowser/node_modules/primeicons/primeicons.css */"./node_modules/primeicons/primeicons.css");
+__webpack_require__(/*! /home/kyjus25/Documents/testing/radiobrowser/node_modules/primeng/resources/themes/nova-light/theme.css */"./node_modules/primeng/resources/themes/nova-light/theme.css");
+module.exports = __webpack_require__(/*! /home/kyjus25/Documents/testing/radiobrowser/node_modules/primeng/resources/primeng.min.css */"./node_modules/primeng/resources/primeng.min.css");
 
 
 /***/ })

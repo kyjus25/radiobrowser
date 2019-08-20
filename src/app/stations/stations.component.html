@@ -182,12 +182,13 @@
   <p-table
            *ngIf="(tableData && !noResults) || loading"
            [columns]="cols"
+           (onPage)="pageChange($event)"
            [value]="tableData"
            [paginator]="true"
            [responsive]="true"
            [autoLayout]="true"
            dataKey="id"
-           [rowsPerPageOptions]="[5,10,25,50,100]"
+           [rowsPerPageOptions]="[5,10,25]"
            [rows]="10"
            [loading]="loading">
     <ng-template pTemplate="header">

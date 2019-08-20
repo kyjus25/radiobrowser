@@ -130,6 +130,8 @@ export class StationsComponent {
     private player: StationPlayerService
   ) {
 
+    console.log('Changes working');
+
     combineLatest([
       this.route.queryParams,
       this.http.get('https://www.radio-browser.info/webservice/json/countries'),
@@ -223,28 +225,7 @@ export class StationsComponent {
         data.votes = parseInt(data.votes, 10);
       });
       this.tableData = tableData;
-      console.log(this.tableData);
-      this.icyUnsubscribe.next();
-      this.icyUnsubscribe.complete();
-
-      const this1 = this;
-      clearInterval(this.interval);
-      this.tableData.forEach(data => {
-        this.http.get('https://icy.radio-browser.live/icy.php?url=' + data.url).pipe( takeUntil(this.icyUnsubscribe) ).subscribe(icy => {
-          if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
-            data.playing = icy['icy-title'];
-          }
-        });
-      });
-      this.interval = setInterval(function() {
-        this1.tableData.forEach(data => {
-          this1.http.get('https://icy.radio-browser.live/icy.php?url=' + data.url).pipe( takeUntil(this1.icyUnsubscribe) ).subscribe(icy => {
-            if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
-              data.playing = icy['icy-title'];
-            }
-          });
-        });
-      }, 60000);
+      this.pageChange({first: 0, rows: 10});
       this.loading = false;
       this.noResults = this.tableData.length === 0;
     });
@@ -334,5 +315,34 @@ export class StationsComponent {
 
   searchAllTags(event) {
     this.filteredTags = this.allTags.filter(tag => tag.name.toLowerCase().includes(event.query.toLowerCase()));
+  }
+
+  public pageChange(event) {
+    console.log(event);
+
+    this.icyUnsubscribe.next();
+    this.icyUnsubscribe.complete();
+
+    clearInterval(this.interval);
+    this.getIcy(event);
+    this.interval = setInterval(() => {
+      this.getIcy(event);
+    }, 60000);
+  }
+
+  private getIcy(event) {
+    console.log('GETTING ICY', event.first, event.rows);
+    for (let i = 0; i < event.rows; i++) {
+      console.log(i, this.tableData[event.first + i]);
+      if (this.tableData[event.first + i]) {
+        this.http.get('https://icy.radio-browser.live/icy.php?url=' + this.tableData[event.first + i].url)
+          .pipe( takeUntil(this.icyUnsubscribe) )
+          .subscribe(icy => {
+            if (icy && icy.hasOwnProperty('icy-title') && icy['icy-title'] !== '') {
+              this.tableData[event.first + i].playing = icy['icy-title'];
+            }
+          });
+      }
+    }
   }
 }
