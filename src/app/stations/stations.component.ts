@@ -158,8 +158,8 @@ export class StationsComponent {
         this.searchBroken = !!queryParams.broken;
         this.searchImprovable = !!queryParams.improvable;
 
-        this.first = parseInt(queryParams.first, 10);
-        this.rows = parseInt(queryParams.rows, 10);
+        this.first = queryParams.first ? parseInt(queryParams.first, 10) : 0;
+        this.rows = queryParams.rows ? parseInt(queryParams.rows, 10) : 10;
 
         this.setParams();
       }
