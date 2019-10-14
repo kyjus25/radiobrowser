@@ -301,7 +301,7 @@ export class HomeComponent {
   }
 
   public goToStations() {
-    this.router.navigate(['/stations'], { queryParams: { search: this.searchText } });
+    this.router.navigate(['/stations'], { queryParams: { name: this.searchText } });
   }
 
   public numberWithCommas(x) {

@@ -19,6 +19,20 @@
   </p-footer>
 </p-dialog>
 
+<p-dialog *ngIf="displayHistoryModal && displayedStation" [(visible)]="displayHistoryModal" id="history-modal">
+  <p-header>
+    History
+  </p-header>
+  <div class="ui-g">
+    <div class="ui-g-12" *ngFor="let history of displayedStation">
+      <pre>{{history | json}}</pre>
+    </div>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="fas fa-close" (click)="displayHistoryModal = false" class="ui-button">Close</button>
+  </p-footer>
+</p-dialog>
+
 <div class="page-wrapper">
   <h1>Stations</h1>
 
@@ -36,7 +50,7 @@
     <p-accordionTab
       header="Search Terms"
       [selected]="searchIsSelected"
-      (keyup.enter)="searchStations()"
+      (keyup.enter)="setParams(true)"
     >
       <div class="container">
         <p class="label">Show Only</p>
@@ -45,7 +59,6 @@
           offLabel="Broken"
           onIcon="pi pi-check"
           offIcon="pi pi-times"
-          (click)="showBroken()"
           [(ngModel)]="searchBroken"
         ></p-toggleButton>
 
@@ -54,7 +67,6 @@
           offLabel="Improvable"
           onIcon="pi pi-check"
           offIcon="pi pi-times"
-          (click)="showImprovable()"
           [(ngModel)]="searchImprovable"
         ></p-toggleButton>
       </div>
@@ -111,7 +123,6 @@
         <p-autoComplete
           autocomplete="dont"
           [(ngModel)]="searchCountry"
-          field="name"
           [forceSelection]="true"
           [suggestions]="filteredCountries"
           (completeMethod)="searchCountries($event)"
@@ -125,7 +136,6 @@
         <p-autoComplete
           autocomplete="dont"
           [(ngModel)]="searchState"
-          field="name"
           [forceSelection]="true"
           [suggestions]="filteredStates"
           (completeMethod)="searchStates($event)"
@@ -139,7 +149,6 @@
         <p-autoComplete
           autocomplete="dont"
           [(ngModel)]="searchLanguage"
-          field="name"
           [forceSelection]="true"
           [suggestions]="filteredLanguages"
           (completeMethod)="searchLanguages($event)"
@@ -153,7 +162,6 @@
         <p-autoComplete
           autocomplete="dont"
           [(ngModel)]="searchTags"
-          field="name"
           [dropdown]="true"
           [multiple]="true"
           [forceSelection]="true"
@@ -164,32 +172,26 @@
 
       <br>
 
-      <button (click)="searchStations()">Search Stations</button>
+      <button (click)="setParams(true)">Search Stations</button>
     </p-accordionTab>
   </p-accordion>
-
 
 
   <p *ngIf="tableData && noResults">
     No results for this query.
   </p>
-  <!--<p-multiSelect-->
-    <!--[options]="cols"-->
-    <!--[(ngModel)]="visibleColumns"-->
-    <!--(onChange)="filterColumns();"-->
-    <!--optionLabel="header">-->
-  <!--</p-multiSelect>-->
   <p-table
            *ngIf="(tableData && !noResults) || loading"
            [columns]="cols"
            (onPage)="pageChange($event)"
            [value]="tableData"
            [paginator]="true"
+           [first]="first"
            [responsive]="true"
            [autoLayout]="true"
            dataKey="id"
            [rowsPerPageOptions]="[5,10,25]"
-           [rows]="10"
+           [rows]="rows"
            [loading]="loading">
     <ng-template pTemplate="header">
       <tr>
@@ -244,7 +246,7 @@
           <a target="_blank" href="{{station.homepage}}"><i class="fas fa-home"></i></a>
           <i (click)="voteStation(station)" class="fas fa-thumbs-up"></i>
           <i (click)="displayStation(station)" class="fas fa-question-circle"></i>
-          <i class="fas fa-step-backward" routerLink="/stations/history/{{station.stationuuid}}"></i>
+          <i class="fas fa-step-backward" (click)="displayHistory(station)"></i>
         </td>
       </tr>
     </ng-template>

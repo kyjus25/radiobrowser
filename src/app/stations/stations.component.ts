@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FooterComponent} from '../shared/footer/footer.component';
 import {StationPlayerService} from '../shared/station-player.service';
 import {combineLatest, Subject} from 'rxjs';
@@ -16,15 +16,18 @@ export class StationsComponent {
   public loading = false;
   public noResults = true;
 
+  public first = 0;
+  public rows = 10;
+
   public interval;
   public icyUnsubscribe: Subject<void> = new Subject<void>();
 
   public displayStationModal = false;
+  public displayHistoryModal = false;
   public displayedStation;
 
   public tableData;
   public searchIsSelected = true;
-  public visibleColumns = [];
 
   public countries;
   public filteredCountries;
@@ -126,6 +129,7 @@ export class StationsComponent {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
+    private router: Router,
     private messageService: MessageService,
     private player: StationPlayerService
   ) {
@@ -133,31 +137,31 @@ export class StationsComponent {
     this.listenStationPlayingChanges();
 
     combineLatest([
-      this.route.queryParams,
       this.http.get('https://www.radio-browser.info/webservice/json/countries'),
       this.http.get('https://www.radio-browser.info/webservice/json/states'),
       this.http.get('https://www.radio-browser.info/webservice/json/languages'),
       this.http.get('https://www.radio-browser.info/webservice/json/tags')
-    ]).subscribe(([queryParams, countries, states, languages, tags]) => {
+    ]).subscribe(([countries, states, languages, tags]) => {
+      const queryParams = this.route.snapshot.queryParams;
+      console.log('params', queryParams);
+      if (Object.keys(queryParams).length > 0) {
+        this.searchName = queryParams.name;
+        this.searchCountry = queryParams.country;
+        this.searchState = queryParams.state;
+        this.searchLanguage = queryParams.language;
+        this.searchTags = queryParams.tags ? queryParams.tags.split(',') : '';
 
-      if (queryParams.hasOwnProperty('search') && queryParams.search.length > 0) {
-        this.searchName = queryParams.search;
-        this.searchStations();
-        this.searchIsSelected = false;
-      }
+        this.searchClicks = !!queryParams.clicks;
+        this.searchVotes = !!queryParams.votes;
+        this.searchPlayed = !!queryParams.played;
+        this.searchNewness = !!queryParams.newness;
+        this.searchBroken = !!queryParams.broken;
+        this.searchImprovable = !!queryParams.improvable;
 
-      if (queryParams.hasOwnProperty('broken')) {
-        this.searchName = '';
-        this.searchBroken = true;
-        this.showBroken();
-        this.searchIsSelected = false;
-      }
+        this.first = parseInt(queryParams.first, 10);
+        this.rows = parseInt(queryParams.rows, 10);
 
-      if (queryParams.hasOwnProperty('improvable')) {
-        this.searchName = '';
-        this.searchImprovable = true;
-        this.showImprovable();
-        this.searchIsSelected = false;
+        this.setParams();
       }
 
       this.countries = countries;
@@ -167,37 +171,18 @@ export class StationsComponent {
     });
   }
 
-  public searchStations() {
+  public searchStations(params) {
     this.loading = true;
-    this.searchBroken = false;
-    this.searchImprovable = false;
     this.searchIsSelected = false;
 
-    let countryName = null;
-    let stateName = null;
-    let languageName = null;
-    let tagsCommaSeperated = null;
-
-    if (this.searchCountry !== undefined) {
-      const country: any = this.searchCountry;
-      countryName = country.name;
+    if (this.searchBroken) {
+      this.showBroken();
+      return;
     }
 
-    if (this.searchState !== undefined) {
-      const state: any = this.searchState;
-      stateName = state.name;
-    }
-
-    if (this.searchLanguage !== undefined) {
-      const language: any = this.searchLanguage;
-      languageName = language.name;
-    }
-
-    if (this.searchTags !== undefined && this.searchTags.length > 0) {
-      const tagsArray = <any[]><unknown>this.searchTags;
-      tagsCommaSeperated = tagsArray.map(tag => {
-        return tag.name;
-      });
+    if (this.searchImprovable) {
+      this.showImprovable();
+      return;
     }
 
     let orderBy = null;
@@ -207,11 +192,11 @@ export class StationsComponent {
     if (this.searchPlayed) { orderBy = 'clicktrend'; }
 
     const searchParams = {
-      name: this.searchName,
-      country: countryName,
-      state: stateName,
-      language: languageName,
-      tagList: tagsCommaSeperated,
+      name: params['name'] ? params['name'] : null,
+      country: params['country'],
+      state: params['state'],
+      language: params['language'],
+      tagList: params['tags'],
       order: orderBy,
       reverse: false
     };
@@ -225,40 +210,35 @@ export class StationsComponent {
         data.votes = parseInt(data.votes, 10);
       });
       this.tableData = tableData;
-      this.pageChange({first: 0, rows: 10});
       this.loading = false;
       this.noResults = this.tableData.length === 0;
     });
   }
 
   public showBroken() {
-    if (this.searchBroken) {
-      this.disableOtherSorting('Broken');
-      this.wipeSearches();
-      this.http.get(
-        'https://www.radio-browser.info/webservice/json/stations/broken'
-      ).subscribe(res => {
-        this.tableData = <any[]>res;
-        this.tableData.map(data => data.votes = parseInt(data.votes, 10));
-        this.loading = false;
-        this.noResults = this.tableData.length === 0;
-      });
-    }
+    this.disableOtherSorting('Broken');
+    this.wipeSearches();
+    this.http.get(
+      'https://www.radio-browser.info/webservice/json/stations/broken'
+    ).subscribe(res => {
+      this.tableData = <any[]>res;
+      this.tableData.map(data => data.votes = parseInt(data.votes, 10));
+      this.loading = false;
+      this.noResults = this.tableData.length === 0;
+    });
   }
 
   public showImprovable() {
-    if (this.searchImprovable) {
-      this.disableOtherSorting('Improvable');
-      this.wipeSearches();
-      this.http.get(
-        'https://www.radio-browser.info/webservice/json/stations/improvable'
-      ).subscribe(res => {
-        this.tableData = <any[]>res;
-        this.tableData.map(data => data.votes = parseInt(data.votes, 10));
-        this.loading = false;
-        this.noResults = this.tableData.length === 0;
-      });
-    }
+    this.disableOtherSorting('Improvable');
+    this.wipeSearches();
+    this.http.get(
+      'https://www.radio-browser.info/webservice/json/stations/improvable'
+    ).subscribe(res => {
+      this.tableData = <any[]>res;
+      this.tableData.map(data => data.votes = parseInt(data.votes, 10));
+      this.loading = false;
+      this.noResults = this.tableData.length === 0;
+    });
   }
 
   public listenStationPlayingChanges() {
@@ -273,6 +253,33 @@ export class StationsComponent {
         }
       }
     });
+  }
+
+  public setParams(setPage?) {
+    const params = {};
+    if ( this.searchName) {params['name'] = this.searchName; }
+    if ( this.searchCountry ) {params['country'] = this.searchCountry; }
+    if ( this.searchState ) {params['state'] = this.searchState; }
+    if ( this.searchLanguage ) {params['language'] = this.searchLanguage; }
+    if ( this.searchTags ) {params['tags'] = this.searchTags; }
+    if ( this.searchClicks ) { params['clicks'] = this.searchClicks; }
+    if ( this.searchVotes ) { params['votes'] = this.searchVotes; }
+    if ( this.searchPlayed ) { params['played'] = this.searchPlayed; }
+    if ( this.searchNewness ) { params['newness'] = this.searchNewness; }
+    if ( this.searchBroken ) { params['broken'] = this.searchBroken; }
+    if ( this.searchImprovable ) { params['improvable'] = this.searchImprovable; }
+
+    params['rows'] = this.rows;
+    params['first'] = this.first;
+
+    if (setPage) {
+      this.pageChange({first: 0, rows: this.rows});
+      params['rows'] = this.rows;
+      params['first'] = 0;
+    }
+
+    this.router.navigate(['.'], {queryParams: params, queryParamsHandling: '', relativeTo: this.route}).then();
+    this.searchStations(params);
   }
 
 
@@ -311,27 +318,65 @@ export class StationsComponent {
   }
 
   public displayStation(station) {
-    this.displayStationModal = true;
     this.displayedStation = station;
+    this.displayStationModal = true;
+  }
+
+  public displayHistory(station) {
+    this.http.get('https://www.radio-browser.info/webservice/json/stations/changed/' + station.stationuuid).subscribe(history => {
+      const historyArray = <any[]>history;
+      this.displayedStation = [];
+      for (let i = 0; i < historyArray.length; i++) {
+        if (i === 0) {
+          const map = {
+            name: 'undefined -> ' + historyArray[i]['name'],
+            url: 'undefined -> ' + historyArray[i]['url'],
+            homepage: 'undefined -> ' + historyArray[i]['homepage'],
+            favicon: 'undefined -> ' + historyArray[i]['favicon'],
+            tags: 'undefined -> ' + historyArray[i]['tags'],
+            country: 'undefined -> ' + historyArray[i]['country'],
+            state: 'undefined -> ' + historyArray[i]['state'],
+            language: 'undefined -> ' + historyArray[i]['language']
+          };
+          this.displayedStation.push(map);
+        } else {
+          const map = {
+            name: historyArray[i - 1]['name'] + ' -> ' + historyArray[i]['name'],
+            url: historyArray[i - 1]['url'] + '-> ' + historyArray[i]['url'],
+            homepage: historyArray[i - 1]['homepage'] + ' -> ' + historyArray[i]['homepage'],
+            favicon: historyArray[i - 1]['favicon'] + ' -> ' + historyArray[i]['favicon'],
+            tags: historyArray[i - 1]['tags'] + ' -> ' + historyArray[i]['tags'],
+            country: historyArray[i - 1]['country'] + ' -> ' + historyArray[i]['country'],
+            state: historyArray[i - 1]['state'] + ' -> ' + historyArray[i]['state'],
+            language: historyArray[i - 1]['language'] + ' -> ' + historyArray[i]['language']
+          };
+          this.displayedStation.push(map);
+        }
+      }
+      this.displayHistoryModal = true;
+    });
   }
 
   searchCountries(event) {
-    this.filteredCountries = this.countries.filter(country => country.name.toLowerCase().includes(event.query.toLowerCase()));
+    this.filteredCountries = this.countries.filter(country => country.name.toLowerCase().includes(event.query.toLowerCase())).map(country => country.value);
   }
 
   searchStates(event) {
-    this.filteredStates = this.states.filter(state => state.name.toLowerCase().includes(event.query.toLowerCase()));
+    this.filteredStates = this.states.filter(state => state.name.toLowerCase().includes(event.query.toLowerCase())).map(state => state.value);
   }
 
   searchLanguages(event) {
-    this.filteredLanguages = this.languages.filter(language => language.name.toLowerCase().includes(event.query.toLowerCase()));
+    this.filteredLanguages = this.languages.filter(language => language.name.toLowerCase().includes(event.query.toLowerCase())).map(language => language.value);
   }
 
   searchAllTags(event) {
-    this.filteredTags = this.allTags.filter(tag => tag.name.toLowerCase().includes(event.query.toLowerCase()));
+    this.filteredTags = this.allTags.filter(tag => tag.name.toLowerCase().includes(event.query.toLowerCase())).map(tag => tag.value);
   }
 
   public pageChange(event) {
+    this.router.navigate(['.'], {queryParams: {first: event.first, rows: event.rows}, queryParamsHandling: 'merge', relativeTo: this.route}).then()
+    this.rows = event.rows;
+    this.first = event.first;
 
     this.icyUnsubscribe.next();
     this.icyUnsubscribe.complete();

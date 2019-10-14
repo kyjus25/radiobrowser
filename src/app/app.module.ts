@@ -8,7 +8,7 @@ import {HomeComponent} from './home/home.component';
 import {FormsModule} from '@angular/forms';
 import {
   AccordionModule,
-  AutoCompleteModule, DialogModule,
+  AutoCompleteModule, ButtonModule, DialogModule,
   DropdownModule,
   InputTextModule, MessageService,
   MultiSelectModule,
@@ -22,7 +22,6 @@ import {StationsComponent} from './stations/stations.component';
 import {FaqsComponent} from './faqs/faqs.component';
 import {TableModule} from 'primeng/table';
 import {StationPlayerService} from './shared/station-player.service';
-import {StationHistoryComponent} from './station-history/station-history.component';
 import {ToastModule} from 'primeng/toast';
 
 @NgModule({
@@ -33,8 +32,7 @@ import {ToastModule} from 'primeng/toast';
     StationsComponent,
     FaqsComponent,
     FooterComponent,
-    NewStationComponent,
-    StationHistoryComponent
+    NewStationComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +49,8 @@ import {ToastModule} from 'primeng/toast';
     InputTextModule,
     HttpClientModule,
     DropdownModule,
-    Router
+    Router,
+    ButtonModule
   ],
   providers: [StationPlayerService, MessageService],
   bootstrap: [AppComponent]
